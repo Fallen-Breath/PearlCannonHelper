@@ -1,4 +1,5 @@
 <RCC>
-    <qresource prefix="PearlCannonHelper">
-    </qresource>
+  <qresource prefix="PearlCannonHelper">
+    <file>exe_ico.ico</file>
+  </qresource>
 </RCC>
