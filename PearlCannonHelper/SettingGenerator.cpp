@@ -88,7 +88,7 @@ void SettingGenerator::on_genPushButton_clicked()
 	const int ColumnCount = 10;
 	model->setColumnCount(ColumnCount);
 	for (int i = 0; i < 1; i++) ui.outputTableView->setColumnWidth(i, 137);
-	for (int i = 1; i < 5; i++) ui.outputTableView->setColumnWidth(i, 88);
+	for (int i = 1; i < 5; i++) ui.outputTableView->setColumnWidth(i, 90);
 	for (int i = 5; i < ColumnCount; i++) ui.outputTableView->setColumnWidth(i, 50);
 	ui.outputTableView->verticalHeader()->setMinimumWidth(70);
 	ui.outputTableView->verticalHeader()->setDefaultAlignment(Qt::AlignCenter);

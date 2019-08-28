@@ -68,6 +68,13 @@ QString PearlCannonHelper::getChunk(double x, double z)
 	return ret;
 }
 
+void PearlCannonHelper::on_tabWidget_currentChanged(int index)
+{
+	if (index == 1)
+	{
+		on_genOutputPushButton_clicked();
+	}
+}
 // in 1gt: [logger -> explode -> move -> drag -> gravity]
 void PearlCannonHelper::on_genOutputPushButton_clicked()
 {

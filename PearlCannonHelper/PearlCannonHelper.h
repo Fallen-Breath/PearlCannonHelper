@@ -14,6 +14,7 @@ public:
 
 public slots:
 	void on_genOutputPushButton_clicked();
+	void on_tabWidget_currentChanged(int);
 
 	void on_bitLineEdit0_textChanged(QString);
 	void on_bitLineEdit1_textChanged(QString);
