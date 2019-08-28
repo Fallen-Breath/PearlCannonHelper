@@ -209,17 +209,46 @@
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LiteProjectile.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PearlCannonHelper.cpp" />
+    <ClCompile Include="SettingGenerator.cpp" />
+    <ClCompile Include="StringHelper.cpp" />
+    <ClCompile Include="TIS360FTLData.cpp" />
+    <ClCompile Include="vec3d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="PearlCannonHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="PearlCannonHelper.ui" />
+    <QtUic Include="SettingGenerator.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="PearlCannonHelper.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LiteProjectile.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="StringHelper.h" />
+    <ClInclude Include="TIS360FTLData.h" />
+    <ClInclude Include="vec3d.h" />
+    <QtMoc Include="SettingGenerator.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PearlCannonHelper.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="exe_ico.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pearlcannonhelper_en.ts" />
+    <None Include="pearlcannonhelper_zh.ts" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

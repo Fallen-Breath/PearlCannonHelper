@@ -60,14 +60,19 @@ public:
     QLabel *motionZLabel;
     QSpacerItem *horizontalSpacer_2;
     QGroupBox *groupBox_2;
-    QHBoxLayout *horizontalLayout_10;
     QVBoxLayout *verticalLayout_4;
+    QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_2;
     QLineEdit *bitLineEdit0;
     QLineEdit *bitLineEdit1;
     QLineEdit *bitLineEdit2;
     QLineEdit *bitLineEdit3;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *copyBitPushButton;
+    QPushButton *pasteBitPushButton;
+    QPushButton *genFromDestination;
+    QSpacerItem *horizontalSpacer_12;
     QGridLayout *gridLayout_10;
     QHBoxLayout *horizontalLayout_9;
     QLabel *label_6;
@@ -95,20 +100,23 @@ public:
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_3;
     QGridLayout *gridLayout_3;
-    QLabel *minYLabel;
-    QLineEdit *minYLineEdit;
+    QLabel *groundYLabel;
+    QLineEdit *groundYLineEdit;
     QLabel *maxTickLabel;
     QLineEdit *maxTickLineEdit;
     QSpacerItem *horizontalSpacer_11;
     QPushButton *genOutputPushButton;
     QTableView *outputTableView;
+    QHBoxLayout *horizontalLayout_5;
+    QPushButton *languagePushButton;
+    QSpacerItem *horizontalSpacer_13;
     QLabel *CreditLabel;
 
     void setupUi(QMainWindow *PearlCannonHelperClass)
     {
         if (PearlCannonHelperClass->objectName().isEmpty())
             PearlCannonHelperClass->setObjectName(QString::fromUtf8("PearlCannonHelperClass"));
-        PearlCannonHelperClass->resize(898, 538);
+        PearlCannonHelperClass->resize(896, 538);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -291,13 +299,13 @@ public:
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         sizePolicy1.setHeightForWidth(groupBox_2->sizePolicy().hasHeightForWidth());
         groupBox_2->setSizePolicy(sizePolicy1);
-        horizontalLayout_10 = new QHBoxLayout(groupBox_2);
-        horizontalLayout_10->setSpacing(6);
-        horizontalLayout_10->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
-        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4 = new QVBoxLayout(groupBox_2);
         verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
@@ -334,7 +342,50 @@ public:
         horizontalLayout_4->addWidget(bitLineEdit3);
 
 
-        verticalLayout_4->addLayout(horizontalLayout_4);
+        verticalLayout_2->addLayout(horizontalLayout_4);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        copyBitPushButton = new QPushButton(groupBox_2);
+        copyBitPushButton->setObjectName(QString::fromUtf8("copyBitPushButton"));
+        QSizePolicy sizePolicy5(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy5.setHorizontalStretch(200);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(copyBitPushButton->sizePolicy().hasHeightForWidth());
+        copyBitPushButton->setSizePolicy(sizePolicy5);
+        copyBitPushButton->setMinimumSize(QSize(100, 0));
+
+        horizontalLayout->addWidget(copyBitPushButton);
+
+        pasteBitPushButton = new QPushButton(groupBox_2);
+        pasteBitPushButton->setObjectName(QString::fromUtf8("pasteBitPushButton"));
+        QSizePolicy sizePolicy6(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy6.setHorizontalStretch(0);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(pasteBitPushButton->sizePolicy().hasHeightForWidth());
+        pasteBitPushButton->setSizePolicy(sizePolicy6);
+        pasteBitPushButton->setMinimumSize(QSize(100, 0));
+
+        horizontalLayout->addWidget(pasteBitPushButton);
+
+        genFromDestination = new QPushButton(groupBox_2);
+        genFromDestination->setObjectName(QString::fromUtf8("genFromDestination"));
+        sizePolicy6.setHeightForWidth(genFromDestination->sizePolicy().hasHeightForWidth());
+        genFromDestination->setSizePolicy(sizePolicy6);
+        genFromDestination->setMinimumSize(QSize(100, 0));
+
+        horizontalLayout->addWidget(genFromDestination);
+
+        horizontalSpacer_12 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_12);
+
+
+        verticalLayout_2->addLayout(horizontalLayout);
+
+
+        verticalLayout_4->addLayout(verticalLayout_2);
 
         gridLayout_10 = new QGridLayout();
         gridLayout_10->setSpacing(6);
@@ -377,11 +428,11 @@ public:
 
         amoutSpinBox1 = new QSpinBox(groupBox_2);
         amoutSpinBox1->setObjectName(QString::fromUtf8("amoutSpinBox1"));
-        QSizePolicy sizePolicy5(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy5.setHorizontalStretch(0);
-        sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(amoutSpinBox1->sizePolicy().hasHeightForWidth());
-        amoutSpinBox1->setSizePolicy(sizePolicy5);
+        QSizePolicy sizePolicy7(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy7.setHorizontalStretch(0);
+        sizePolicy7.setVerticalStretch(0);
+        sizePolicy7.setHeightForWidth(amoutSpinBox1->sizePolicy().hasHeightForWidth());
+        amoutSpinBox1->setSizePolicy(sizePolicy7);
         amoutSpinBox1->setMaximum(20);
 
         horizontalLayout_8->addWidget(amoutSpinBox1);
@@ -433,8 +484,8 @@ public:
 
         amoutSpinBox2 = new QSpinBox(groupBox_2);
         amoutSpinBox2->setObjectName(QString::fromUtf8("amoutSpinBox2"));
-        sizePolicy5.setHeightForWidth(amoutSpinBox2->sizePolicy().hasHeightForWidth());
-        amoutSpinBox2->setSizePolicy(sizePolicy5);
+        sizePolicy7.setHeightForWidth(amoutSpinBox2->sizePolicy().hasHeightForWidth());
+        amoutSpinBox2->setSizePolicy(sizePolicy7);
         amoutSpinBox2->setMaximum(20);
 
         horizontalLayout_7->addWidget(amoutSpinBox2);
@@ -452,11 +503,11 @@ public:
 
         calcFTLPushButton = new QPushButton(groupBox_2);
         calcFTLPushButton->setObjectName(QString::fromUtf8("calcFTLPushButton"));
-        QSizePolicy sizePolicy6(QSizePolicy::Preferred, QSizePolicy::Maximum);
-        sizePolicy6.setHorizontalStretch(0);
-        sizePolicy6.setVerticalStretch(0);
-        sizePolicy6.setHeightForWidth(calcFTLPushButton->sizePolicy().hasHeightForWidth());
-        calcFTLPushButton->setSizePolicy(sizePolicy6);
+        QSizePolicy sizePolicy8(QSizePolicy::Preferred, QSizePolicy::Maximum);
+        sizePolicy8.setHorizontalStretch(0);
+        sizePolicy8.setVerticalStretch(0);
+        sizePolicy8.setHeightForWidth(calcFTLPushButton->sizePolicy().hasHeightForWidth());
+        calcFTLPushButton->setSizePolicy(sizePolicy8);
 
         gridLayout_10->addWidget(calcFTLPushButton, 1, 3, 1, 1);
 
@@ -467,9 +518,6 @@ public:
 
 
         verticalLayout_4->addLayout(gridLayout_10);
-
-
-        horizontalLayout_10->addLayout(verticalLayout_4);
 
 
         verticalLayout_7->addWidget(groupBox_2);
@@ -487,17 +535,17 @@ public:
         gridLayout_3 = new QGridLayout();
         gridLayout_3->setSpacing(6);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        minYLabel = new QLabel(tab_3);
-        minYLabel->setObjectName(QString::fromUtf8("minYLabel"));
-        minYLabel->setFont(font);
+        groundYLabel = new QLabel(tab_3);
+        groundYLabel->setObjectName(QString::fromUtf8("groundYLabel"));
+        groundYLabel->setFont(font);
 
-        gridLayout_3->addWidget(minYLabel, 0, 0, 1, 1);
+        gridLayout_3->addWidget(groundYLabel, 0, 0, 1, 1);
 
-        minYLineEdit = new QLineEdit(tab_3);
-        minYLineEdit->setObjectName(QString::fromUtf8("minYLineEdit"));
-        minYLineEdit->setFont(font);
+        groundYLineEdit = new QLineEdit(tab_3);
+        groundYLineEdit->setObjectName(QString::fromUtf8("groundYLineEdit"));
+        groundYLineEdit->setFont(font);
 
-        gridLayout_3->addWidget(minYLineEdit, 0, 1, 1, 1);
+        gridLayout_3->addWidget(groundYLineEdit, 0, 1, 1, 1);
 
         maxTickLabel = new QLabel(tab_3);
         maxTickLabel->setObjectName(QString::fromUtf8("maxTickLabel"));
@@ -520,8 +568,8 @@ public:
 
         genOutputPushButton = new QPushButton(tab_3);
         genOutputPushButton->setObjectName(QString::fromUtf8("genOutputPushButton"));
-        sizePolicy6.setHeightForWidth(genOutputPushButton->sizePolicy().hasHeightForWidth());
-        genOutputPushButton->setSizePolicy(sizePolicy6);
+        sizePolicy8.setHeightForWidth(genOutputPushButton->sizePolicy().hasHeightForWidth());
+        genOutputPushButton->setSizePolicy(sizePolicy8);
         genOutputPushButton->setFont(font);
 
         horizontalLayout_3->addWidget(genOutputPushButton);
@@ -546,14 +594,53 @@ public:
 
         verticalLayout->addWidget(tabWidget);
 
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        languagePushButton = new QPushButton(centralWidget);
+        languagePushButton->setObjectName(QString::fromUtf8("languagePushButton"));
+
+        horizontalLayout_5->addWidget(languagePushButton);
+
+        horizontalSpacer_13 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer_13);
+
         CreditLabel = new QLabel(centralWidget);
         CreditLabel->setObjectName(QString::fromUtf8("CreditLabel"));
         CreditLabel->setFont(font);
         CreditLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        verticalLayout->addWidget(CreditLabel);
+        horizontalLayout_5->addWidget(CreditLabel);
+
+
+        verticalLayout->addLayout(horizontalLayout_5);
 
         PearlCannonHelperClass->setCentralWidget(centralWidget);
+        QWidget::setTabOrder(posYLineEdit, posZLineEdit);
+        QWidget::setTabOrder(posZLineEdit, posXLineEdit);
+        QWidget::setTabOrder(posXLineEdit, motionXLineEdit);
+        QWidget::setTabOrder(motionXLineEdit, motionZLineEdit);
+        QWidget::setTabOrder(motionZLineEdit, tabWidget);
+        QWidget::setTabOrder(tabWidget, motionYLineEdit);
+        QWidget::setTabOrder(motionYLineEdit, bitLineEdit0);
+        QWidget::setTabOrder(bitLineEdit0, bitLineEdit1);
+        QWidget::setTabOrder(bitLineEdit1, bitLineEdit2);
+        QWidget::setTabOrder(bitLineEdit2, bitLineEdit3);
+        QWidget::setTabOrder(bitLineEdit3, yawComboBox);
+        QWidget::setTabOrder(yawComboBox, amoutSpinBox1);
+        QWidget::setTabOrder(amoutSpinBox1, pitchComboBox);
+        QWidget::setTabOrder(pitchComboBox, amoutSpinBox2);
+        QWidget::setTabOrder(amoutSpinBox2, calcFTLPushButton);
+        QWidget::setTabOrder(calcFTLPushButton, isStartFromExplosionCheckBox);
+        QWidget::setTabOrder(isStartFromExplosionCheckBox, groundYLineEdit);
+        QWidget::setTabOrder(groundYLineEdit, maxTickLineEdit);
+        QWidget::setTabOrder(maxTickLineEdit, genOutputPushButton);
+        QWidget::setTabOrder(genOutputPushButton, outputTableView);
+        QWidget::setTabOrder(outputTableView, copyBitPushButton);
+        QWidget::setTabOrder(copyBitPushButton, genFromDestination);
+        QWidget::setTabOrder(genFromDestination, pasteBitPushButton);
+        QWidget::setTabOrder(pasteBitPushButton, languagePushButton);
 
         retranslateUi(PearlCannonHelperClass);
 
@@ -582,6 +669,9 @@ public:
         motionZLabel->setText(QApplication::translate("PearlCannonHelperClass", "Z", nullptr));
         groupBox_2->setTitle(QApplication::translate("PearlCannonHelperClass", "TIS\347\237\242\351\207\217\347\217\215\347\217\240\347\202\256\351\205\215\347\275\256", nullptr));
         label_2->setText(QApplication::translate("PearlCannonHelperClass", "\344\272\214\350\277\233\345\210\266bit\345\272\217\345\210\227", nullptr));
+        copyBitPushButton->setText(QApplication::translate("PearlCannonHelperClass", "\345\244\215\345\210\266bit\345\272\217\345\210\227", nullptr));
+        pasteBitPushButton->setText(QApplication::translate("PearlCannonHelperClass", "\347\262\230\350\264\264bit\345\272\217\345\210\227", nullptr));
+        genFromDestination->setText(QApplication::translate("PearlCannonHelperClass", "\344\273\216\347\233\256\347\232\204\345\234\260\347\224\237\346\210\220", nullptr));
         label_6->setText(QApplication::translate("PearlCannonHelperClass", "\345\207\272\345\260\204\346\260\264\345\271\263\346\226\271\345\220\221", nullptr));
         yawComboBox->setItemText(0, QApplication::translate("PearlCannonHelperClass", "\344\270\234", nullptr));
         yawComboBox->setItemText(1, QApplication::translate("PearlCannonHelperClass", "\345\215\227", nullptr));
@@ -597,13 +687,14 @@ public:
         calcFTLPushButton->setText(QApplication::translate("PearlCannonHelperClass", "\350\256\241\347\256\227\345\210\235\347\212\266\346\200\201", nullptr));
         isStartFromExplosionCheckBox->setText(QApplication::translate("PearlCannonHelperClass", "\344\273\216TNT\347\210\206\347\202\270\347\232\204gt\345\274\200\345\247\213\346\250\241\346\213\237\350\275\250\350\277\271", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("PearlCannonHelperClass", "\347\217\215\347\217\240\345\210\235\347\212\266\346\200\201", nullptr));
-        minYLabel->setText(QApplication::translate("PearlCannonHelperClass", "\345\234\260\351\235\242Y\345\200\274", nullptr));
-        minYLineEdit->setText(QApplication::translate("PearlCannonHelperClass", "128", nullptr));
+        groundYLabel->setText(QApplication::translate("PearlCannonHelperClass", "\345\234\260\351\235\242Y\345\200\274", nullptr));
+        groundYLineEdit->setText(QApplication::translate("PearlCannonHelperClass", "128", nullptr));
         maxTickLabel->setText(QApplication::translate("PearlCannonHelperClass", "\346\234\200\345\244\247\350\277\255\344\273\243\345\210\273\346\225\260", nullptr));
         maxTickLineEdit->setText(QApplication::translate("PearlCannonHelperClass", "1000", nullptr));
         genOutputPushButton->setText(QApplication::translate("PearlCannonHelperClass", "\347\224\237\346\210\220\350\275\250\350\277\271", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("PearlCannonHelperClass", "\347\217\215\347\217\240\350\275\250\350\277\271\350\276\223\345\207\272", nullptr));
-        CreditLabel->setText(QApplication::translate("PearlCannonHelperClass", "v1.0 by Fallen_Breath", nullptr));
+        languagePushButton->setText(QApplication::translate("PearlCannonHelperClass", "\350\257\255\350\250\200\345\210\207\346\215\242", nullptr));
+        CreditLabel->setText(QApplication::translate("PearlCannonHelperClass", "v2.0 by Fallen_Breath", nullptr));
     } // retranslateUi
 
 };
