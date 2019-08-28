@@ -114,7 +114,7 @@ void PearlCannonHelper::on_genOutputPushButton_clicked()
 		list.append(new QStandardItem(QString::number(pearl.getMz(), 'f', 6)));
 
 		model->appendRow(list); 
-		model->setHeaderData(i, Qt::Vertical, "Tick " + QString::number(i));
+		model->setHeaderData(i, Qt::Vertical, "Tick " + QString::number(i + 1));
 		for (int j = 0; j < 7; j++)
 		{
 			model->item(i, j)->setTextAlignment(Qt::AlignCenter);

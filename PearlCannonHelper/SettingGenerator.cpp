@@ -76,7 +76,7 @@ void SettingGenerator::on_genPushButton_clicked()
 					pearl.tick();
 					for (int tick = 0; tick < maxTick && pearl.getY() >= groundY; tick++)
 					{
-						m_result.push_back(dot(pearl.getPosition().distance(vec3d(dstPosX, pearl.getY(), dstPosZ)), pearl.getX(), pearl.getY(), pearl.getZ(), tick, amount1, amount2, pitch, yaw));
+						m_result.push_back(dot(pearl.getPosition().distance(vec3d(dstPosX, pearl.getY(), dstPosZ)), pearl.getX(), pearl.getY(), pearl.getZ(), tick + 1, amount1, amount2, pitch, yaw));
 						pearl.tick();
 					}
 				}
