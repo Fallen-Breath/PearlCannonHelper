@@ -14,8 +14,7 @@
    <string>SettingGenerator</string>
   </property>
   <property name="windowIcon">
-   <iconset theme=":/PearlCannonHelper/gear.ico">
-    <normaloff>.</normaloff>.</iconset>
+   <iconset theme=":/PearlCannonHelper/gear.ico"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>

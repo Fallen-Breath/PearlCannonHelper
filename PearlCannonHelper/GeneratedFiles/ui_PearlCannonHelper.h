@@ -122,13 +122,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(PearlCannonHelperClass->sizePolicy().hasHeightForWidth());
         PearlCannonHelperClass->setSizePolicy(sizePolicy);
-        QIcon icon;
-        QString iconThemeName = QString::fromUtf8(":/PearlCannonHelper/exe_ico.ico");
-        if (QIcon::hasThemeIcon(iconThemeName)) {
-            icon = QIcon::fromTheme(iconThemeName);
-        } else {
-            icon.addFile(QString::fromUtf8("."), QSize(), QIcon::Normal, QIcon::Off);
-        }
+        QIcon icon(QIcon::fromTheme(QString::fromUtf8(":/PearlCannonHelper/exe_ico.ico")));
         PearlCannonHelperClass->setWindowIcon(icon);
         centralWidget = new QWidget(PearlCannonHelperClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
@@ -650,7 +644,7 @@ public:
 
         retranslateUi(PearlCannonHelperClass);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(PearlCannonHelperClass);

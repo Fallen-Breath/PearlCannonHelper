@@ -12,6 +12,8 @@ PearlCannonHelper::PearlCannonHelper(QWidget *parent): QMainWindow(parent)
 	setAttribute(Qt::WA_QuitOnClose, true);
 	ui.setupUi(this);
 
+	ui.languagePushButton->close();
+
 	// ÕäÖé×´Ì¬
 	ui.posXLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
 	ui.posYLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));

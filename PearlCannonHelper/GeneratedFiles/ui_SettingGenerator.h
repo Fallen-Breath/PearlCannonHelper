@@ -69,13 +69,7 @@ public:
         if (SettingGenerator->objectName().isEmpty())
             SettingGenerator->setObjectName(QString::fromUtf8("SettingGenerator"));
         SettingGenerator->resize(843, 449);
-        QIcon icon;
-        QString iconThemeName = QString::fromUtf8(":/PearlCannonHelper/gear.ico");
-        if (QIcon::hasThemeIcon(iconThemeName)) {
-            icon = QIcon::fromTheme(iconThemeName);
-        } else {
-            icon.addFile(QString::fromUtf8("."), QSize(), QIcon::Normal, QIcon::Off);
-        }
+        QIcon icon(QIcon::fromTheme(QString::fromUtf8(":/PearlCannonHelper/gear.ico")));
         SettingGenerator->setWindowIcon(icon);
         verticalLayout_4 = new QVBoxLayout(SettingGenerator);
         verticalLayout_4->setSpacing(6);
