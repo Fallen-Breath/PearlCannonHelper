@@ -30,15 +30,18 @@ QT_BEGIN_NAMESPACE
 class Ui_SettingGenerator
 {
 public:
-    QVBoxLayout *verticalLayout_4;
-    QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout_2;
+    QVBoxLayout *verticalLayout;
     QGroupBox *groupBox_3;
     QGridLayout *gridLayout_2;
     QLabel *posZLabel_2;
-    QLineEdit *scrXLineEdit;
     QLabel *posXLabel_2;
-    QLineEdit *scrZLineEdit;
+    QLineEdit *srcXLineEdit;
+    QLineEdit *srcZLineEdit;
+    QHBoxLayout *horizontalLayout_4;
+    QLabel *label_2;
+    QLineEdit *floorYLineEdit;
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
     QLabel *posZLabel;
@@ -69,18 +72,19 @@ public:
         if (SettingGenerator->objectName().isEmpty())
             SettingGenerator->setObjectName(QString::fromUtf8("SettingGenerator"));
         SettingGenerator->resize(843, 449);
-        QIcon icon(QIcon::fromTheme(QString::fromUtf8(":/PearlCannonHelper/gear.ico")));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/PearlCannonHelper/gear.ico"), QSize(), QIcon::Normal, QIcon::Off);
         SettingGenerator->setWindowIcon(icon);
-        verticalLayout_4 = new QVBoxLayout(SettingGenerator);
-        verticalLayout_4->setSpacing(6);
-        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        verticalLayout_2 = new QVBoxLayout(SettingGenerator);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         groupBox_3 = new QGroupBox(SettingGenerator);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
         QFont font;
@@ -103,18 +107,6 @@ public:
 
         gridLayout_2->addWidget(posZLabel_2, 1, 0, 1, 1);
 
-        scrXLineEdit = new QLineEdit(groupBox_3);
-        scrXLineEdit->setObjectName(QString::fromUtf8("scrXLineEdit"));
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(scrXLineEdit->sizePolicy().hasHeightForWidth());
-        scrXLineEdit->setSizePolicy(sizePolicy1);
-        scrXLineEdit->setFont(font);
-        scrXLineEdit->setReadOnly(true);
-
-        gridLayout_2->addWidget(scrXLineEdit, 0, 1, 1, 2);
-
         posXLabel_2 = new QLabel(groupBox_3);
         posXLabel_2->setObjectName(QString::fromUtf8("posXLabel_2"));
         sizePolicy.setHeightForWidth(posXLabel_2->sizePolicy().hasHeightForWidth());
@@ -124,17 +116,53 @@ public:
 
         gridLayout_2->addWidget(posXLabel_2, 0, 0, 1, 1);
 
-        scrZLineEdit = new QLineEdit(groupBox_3);
-        scrZLineEdit->setObjectName(QString::fromUtf8("scrZLineEdit"));
-        sizePolicy1.setHeightForWidth(scrZLineEdit->sizePolicy().hasHeightForWidth());
-        scrZLineEdit->setSizePolicy(sizePolicy1);
-        scrZLineEdit->setFont(font);
-        scrZLineEdit->setReadOnly(true);
+        srcXLineEdit = new QLineEdit(groupBox_3);
+        srcXLineEdit->setObjectName(QString::fromUtf8("srcXLineEdit"));
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(srcXLineEdit->sizePolicy().hasHeightForWidth());
+        srcXLineEdit->setSizePolicy(sizePolicy1);
+        srcXLineEdit->setFont(font);
+        srcXLineEdit->setReadOnly(false);
 
-        gridLayout_2->addWidget(scrZLineEdit, 1, 1, 1, 2);
+        gridLayout_2->addWidget(srcXLineEdit, 0, 1, 1, 2);
+
+        srcZLineEdit = new QLineEdit(groupBox_3);
+        srcZLineEdit->setObjectName(QString::fromUtf8("srcZLineEdit"));
+        sizePolicy1.setHeightForWidth(srcZLineEdit->sizePolicy().hasHeightForWidth());
+        srcZLineEdit->setSizePolicy(sizePolicy1);
+        srcZLineEdit->setFont(font);
+        srcZLineEdit->setReadOnly(false);
+
+        gridLayout_2->addWidget(srcZLineEdit, 1, 1, 1, 2);
 
 
-        verticalLayout_2->addWidget(groupBox_3);
+        verticalLayout->addWidget(groupBox_3);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        label_2 = new QLabel(SettingGenerator);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        QFont font1;
+        font1.setPointSize(11);
+        label_2->setFont(font1);
+
+        horizontalLayout_4->addWidget(label_2);
+
+        floorYLineEdit = new QLineEdit(SettingGenerator);
+        floorYLineEdit->setObjectName(QString::fromUtf8("floorYLineEdit"));
+        sizePolicy1.setHeightForWidth(floorYLineEdit->sizePolicy().hasHeightForWidth());
+        floorYLineEdit->setSizePolicy(sizePolicy1);
+        floorYLineEdit->setMinimumSize(QSize(0, 0));
+        floorYLineEdit->setMaximumSize(QSize(100, 16777215));
+        floorYLineEdit->setFont(font1);
+
+        horizontalLayout_4->addWidget(floorYLineEdit);
+
+
+        verticalLayout->addLayout(horizontalLayout_4);
 
         groupBox = new QGroupBox(SettingGenerator);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
@@ -178,18 +206,16 @@ public:
         gridLayout->addWidget(dstZLineEdit, 1, 1, 1, 2);
 
 
-        verticalLayout_2->addWidget(groupBox);
+        verticalLayout->addWidget(groupBox);
 
 
-        horizontalLayout_2->addLayout(verticalLayout_2);
+        horizontalLayout_2->addLayout(verticalLayout);
 
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         groupBox_2 = new QGroupBox(SettingGenerator);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        QFont font1;
-        font1.setPointSize(11);
         groupBox_2->setFont(font1);
         horizontalLayout_3 = new QHBoxLayout(groupBox_2);
         horizontalLayout_3->setSpacing(6);
@@ -300,13 +326,13 @@ public:
         horizontalLayout_2->addLayout(verticalLayout_3);
 
 
-        verticalLayout_4->addLayout(horizontalLayout_2);
+        verticalLayout_2->addLayout(horizontalLayout_2);
 
         outputTableView = new QTableView(SettingGenerator);
         outputTableView->setObjectName(QString::fromUtf8("outputTableView"));
         outputTableView->setFont(font1);
 
-        verticalLayout_4->addWidget(outputTableView);
+        verticalLayout_2->addWidget(outputTableView);
 
 
         retranslateUi(SettingGenerator);
@@ -319,9 +345,10 @@ public:
         SettingGenerator->setWindowTitle(QApplication::translate("SettingGenerator", "SettingGenerator", nullptr));
         groupBox_3->setTitle(QApplication::translate("SettingGenerator", "\345\207\272\345\217\221\345\234\260", nullptr));
         posZLabel_2->setText(QApplication::translate("SettingGenerator", "Z", nullptr));
-        scrXLineEdit->setText(QString());
         posXLabel_2->setText(QApplication::translate("SettingGenerator", "X", nullptr));
-        scrZLineEdit->setText(QString());
+        srcXLineEdit->setText(QString());
+        srcZLineEdit->setText(QString());
+        label_2->setText(QApplication::translate("SettingGenerator", "\347\217\215\347\217\240\346\211\224\345\207\272\347\202\271\345\234\260\351\235\242Y", nullptr));
         groupBox->setTitle(QApplication::translate("SettingGenerator", "\347\233\256\347\232\204\345\234\260", nullptr));
         posZLabel->setText(QApplication::translate("SettingGenerator", "Z", nullptr));
         dstXLineEdit->setText(QApplication::translate("SettingGenerator", "1000", nullptr));

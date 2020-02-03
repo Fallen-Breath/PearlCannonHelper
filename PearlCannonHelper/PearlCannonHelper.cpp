@@ -1,5 +1,4 @@
-#include "PearlCannonHelper.h"
-#include "TIS360FTLData.h"
+ï»¿#include "PearlCannonHelper.h"
 #include "LiteProjectile.h"
 #include "StringHelper.h"
 #include <QFileDialog>
@@ -14,7 +13,7 @@ PearlCannonHelper::PearlCannonHelper(QWidget *parent): QMainWindow(parent)
 
 	ui.languagePushButton->close();
 
-	// ÕäÖé×´Ì¬
+	// çç çŠ¶æ€
 	ui.posXLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
 	ui.posYLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
 	ui.posZLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
@@ -22,33 +21,33 @@ PearlCannonHelper::PearlCannonHelper(QWidget *parent): QMainWindow(parent)
 	ui.motionYLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
 	ui.motionZLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
 
-	// ÕäÖéÅÚbit
+	// çç ç‚®bit
 	ui.bitLineEdit0->setValidator(new QRegExpValidator(QRegExp("[0,1]{1,1}"), this));
 	ui.bitLineEdit1->setValidator(new QRegExpValidator(QRegExp("[0,1]{1,5}"), this));
 	ui.bitLineEdit2->setValidator(new QRegExpValidator(QRegExp("[0,1]{1,2}"), this));
 	ui.bitLineEdit3->setValidator(new QRegExpValidator(QRegExp("[0,1]{1,5}"), this));
 
-	// Êä³öÌõ¼þ
+	// è¾“å‡ºæ¡ä»¶
 	ui.groundYLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
 	ui.maxTickLineEdit->setValidator(new QRegExpValidator(QRegExp("\\d{1,9}"), this));
 
-	// ³õÊ¼»¯Êý¾Ý
+	// åˆå§‹åŒ–æ•°æ®
 	m_pitch = m_amount1 = m_yaw = m_amount2 = 1;
 	changeFTLBit0("0", true);
 	changeFTLBit1("0", true);
 	changeFTLBit2("0", true);
 	changeFTLBit3("0", true);
 
-	ui.amoutSpinBox1->setMaximum(TIS360FTLData::maxUnit);
-	ui.amoutSpinBox2->setMaximum(TIS360FTLData::maxUnit);
+	ui.amoutSpinBox1->setMaximum(settingGenerator.data.maxUnit);
+	ui.amoutSpinBox2->setMaximum(settingGenerator.data.maxUnit);
 
-	// Í¬²½ÉèÖÃÉú³ÉÆ÷´°¿Ú¼äµÄÊý¾Ý
+	// åŒæ­¥è®¾ç½®ç”Ÿæˆå™¨çª—å£é—´çš„æ•°æ®
 	connect(ui.groundYLineEdit, SIGNAL(textEdited(QString)), &settingGenerator, SLOT(on_mainWindow_groundYLineEdit_textEdited(QString)));
 	connect(ui.maxTickLineEdit, SIGNAL(textEdited(QString)), &settingGenerator, SLOT(on_mainWindow_maxTickLineEdit_textEdited(QString)));
 	connect(&settingGenerator, SIGNAL(groundYLineEdit_textEdited(QString)), this, SLOT(on_settingWindow_groundYLineEdit_textEdited(QString)));
 	connect(&settingGenerator, SIGNAL(maxTickLineEdit_textEdited(QString)), this, SLOT(on_settingWindow_maxTickLineEdit_textEdited(QString)));
 
-	// ´ÓÉèÖÃÉú³ÉÆ÷´°¿Ú»ñÈ¡ÉèÖÃÐÅÏ¢
+	// ä»Žè®¾ç½®ç”Ÿæˆå™¨çª—å£èŽ·å–è®¾ç½®ä¿¡æ¯
 	connect(&settingGenerator, SIGNAL(sendSetting(QString)), this, SLOT(pasteSettingData(QString)));
 }
 
@@ -209,10 +208,8 @@ void PearlCannonHelper::on_amoutSpinBox2_valueChanged(int x)
 
 void PearlCannonHelper::on_calcFTLPushButton_clicked()
 {
-	using namespace TIS360FTLData;
-
-	LiteProjectile pearl(scrPos[m_pitch], motion[m_pitch]);
-	pearl.accelerate(getThrust(m_pitch, m_amount1, m_yaw, m_amount2));
+	LiteProjectile pearl(settingGenerator.data.getSourcePos(m_pitch), settingGenerator.data.motion[m_pitch]);
+	pearl.accelerate(settingGenerator.data.getThrust(m_pitch, m_amount1, m_yaw, m_amount2));
 
 	if (!ui.isStartFromExplosionCheckBox->isChecked())
 	{

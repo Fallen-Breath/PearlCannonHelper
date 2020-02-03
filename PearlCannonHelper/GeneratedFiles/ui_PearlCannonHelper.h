@@ -122,7 +122,8 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(PearlCannonHelperClass->sizePolicy().hasHeightForWidth());
         PearlCannonHelperClass->setSizePolicy(sizePolicy);
-        QIcon icon(QIcon::fromTheme(QString::fromUtf8(":/PearlCannonHelper/exe_ico.ico")));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/PearlCannonHelper/exe_ico.ico"), QSize(), QIcon::Normal, QIcon::Off);
         PearlCannonHelperClass->setWindowIcon(icon);
         centralWidget = new QWidget(PearlCannonHelperClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
@@ -694,7 +695,7 @@ public:
         genOutputPushButton->setText(QApplication::translate("PearlCannonHelperClass", "\347\224\237\346\210\220\350\275\250\350\277\271", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("PearlCannonHelperClass", "\347\217\215\347\217\240\350\275\250\350\277\271\350\276\223\345\207\272", nullptr));
         languagePushButton->setText(QApplication::translate("PearlCannonHelperClass", "\350\257\255\350\250\200\345\210\207\346\215\242", nullptr));
-        CreditLabel->setText(QApplication::translate("PearlCannonHelperClass", "v2.2 by Fallen_Breath", nullptr));
+        CreditLabel->setText(QApplication::translate("PearlCannonHelperClass", "v2.3 by Fallen_Breath", nullptr));
     } // retranslateUi
 
 };

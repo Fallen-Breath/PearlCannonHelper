@@ -1,5 +1,4 @@
-#include "SettingGenerator.h"
-#include "TIS360FTLData.h"
+ï»¿#include "SettingGenerator.h"
 #include "LiteProjectile.h"
 #include "StringHelper.h"
 #include <tuple>
@@ -15,14 +14,19 @@ SettingGenerator::SettingGenerator(QWidget *parent): QWidget(parent)
 
 	QString expRealNumber = "^-?\\d+\\.?\\d*$";
 	ui.groundYLineEdit->setValidator(new QRegExpValidator(QRegExp(expRealNumber), this));
+	ui.srcXLineEdit->setValidator(new QRegExpValidator(QRegExp(expRealNumber), this));
+	ui.srcZLineEdit->setValidator(new QRegExpValidator(QRegExp(expRealNumber), this));
+	ui.floorYLineEdit->setValidator(new QRegExpValidator(QRegExp(expRealNumber), this));
 	ui.maxTickLineEdit->setValidator(new QRegExpValidator(QRegExp("\\d{1,9}"), this));
 
-	ui.maxUnitSpinBox->setMaximum(TIS360FTLData::maxUnit);
-	ui.scrXLineEdit->setText(QString::number(TIS360FTLData::scrX));
-	ui.scrZLineEdit->setText(QString::number(TIS360FTLData::scrZ));
+	ui.maxUnitSpinBox->setMaximum(this->data.maxUnit);
+	ui.srcXLineEdit->setText(QString::number(this->data.srcX));
+	ui.srcZLineEdit->setText(QString::number(this->data.srcZ));
+	ui.floorYLineEdit->setText(QString::number(this->data.floorY));
 
 	ui.dstXLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
 	ui.dstZLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
+
 }
 
 void SettingGenerator::on_groundYLineEdit_textEdited(QString text)
@@ -32,6 +36,18 @@ void SettingGenerator::on_groundYLineEdit_textEdited(QString text)
 void SettingGenerator::on_maxTickLineEdit_textEdited(QString text)
 {
 	emit maxTickLineEdit_textEdited(text);
+}
+void SettingGenerator::on_srcXLineEdit_textEdited(QString text)
+{
+	this->data.srcX = text.toDouble();
+}
+void SettingGenerator::on_srcZLineEdit_textEdited(QString text)
+{
+	this->data.srcZ = text.toDouble();
+}
+void SettingGenerator::on_floorYLineEdit_textEdited(QString text)
+{
+	this->data.floorY = text.toDouble();
 }
 void SettingGenerator::on_mainWindow_groundYLineEdit_textEdited(QString text)
 {
@@ -57,7 +73,6 @@ QString SettingGenerator::getBitSequence(dot d)
 
 void SettingGenerator::on_genPushButton_clicked()
 {
-	using namespace TIS360FTLData;
 	double dstPosX = ui.dstXLineEdit->text().toDouble();
 	double dstPosZ = ui.dstZLineEdit->text().toDouble();
 	int maxUnit = ui.maxUnitSpinBox->value();
@@ -71,8 +86,8 @@ void SettingGenerator::on_genPushButton_clicked()
 			for (int yaw = 0; yaw < 4; yaw++)
 				for (int amount2 = 0; amount2 <= maxUnit; amount2++)
 				{
-					LiteProjectile pearl(scrPos[pitch], motion[pitch]);
-					pearl.accelerate(getThrust(pitch, amount1, yaw, amount2));
+					LiteProjectile pearl(data.getSourcePos(pitch), data.motion[pitch]);
+					pearl.accelerate(data.getThrust(pitch, amount1, yaw, amount2));
 					pearl.tick();
 					for (int tick = 0; tick < maxTick && pearl.getY() >= groundY; tick++)
 					{
@@ -82,7 +97,7 @@ void SettingGenerator::on_genPushButton_clicked()
 				}
 	sort(m_result.begin(), m_result.end());
 
-	// Êä³öÖÁ±í¸ñ
+	// è¾“å‡ºè‡³è¡¨æ ¼
 	QStandardItemModel *model = new QStandardItemModel;
 	ui.outputTableView->setModel(model);
 	const int ColumnCount = 10;

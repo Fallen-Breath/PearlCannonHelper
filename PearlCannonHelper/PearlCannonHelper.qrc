@@ -1,6 +1,6 @@
 <RCC>
   <qresource prefix="PearlCannonHelper">
-    <file>gear.ico</file>
     <file>exe_ico.ico</file>
+    <file>gear.ico</file>
   </qresource>
 </RCC>

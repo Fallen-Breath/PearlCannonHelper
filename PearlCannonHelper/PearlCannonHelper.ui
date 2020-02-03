@@ -20,7 +20,8 @@
    <string>PearlCannonHelper</string>
   </property>
   <property name="windowIcon">
-   <iconset theme=":/PearlCannonHelper/exe_ico.ico"/>
+   <iconset resource="PearlCannonHelper.qrc">
+    <normaloff>:/PearlCannonHelper/exe_ico.ico</normaloff>:/PearlCannonHelper/exe_ico.ico</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -910,7 +911,7 @@
          </font>
         </property>
         <property name="text">
-         <string>v2.2 by Fallen_Breath</string>
+         <string>v2.3 by Fallen_Breath</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

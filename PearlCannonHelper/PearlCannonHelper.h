@@ -1,9 +1,9 @@
-#pragma once
+﻿#pragma once
 
 #include <QtWidgets/QMainWindow>
 #include "ui_PearlCannonHelper.h"
 #include "SettingGenerator.h"
-#include "TIS360FTLData.h"
+#include "FTLData.h"
 
 class PearlCannonHelper : public QMainWindow
 {
