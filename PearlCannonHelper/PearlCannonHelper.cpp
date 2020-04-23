@@ -1,17 +1,19 @@
 ﻿#include "PearlCannonHelper.h"
-#include "LiteProjectile.h"
+#include "Pearl.h"
 #include "StringHelper.h"
+#include "Constant.h"
 #include <QFileDialog>
 #include <QClipboard>
 #include <QMessageBox>
-#include <QStandardItemModel>
+#include <QSettings>
+#include <QDebug>
+#include <cmath>
+using namespace std;
 
 PearlCannonHelper::PearlCannonHelper(QWidget *parent): QMainWindow(parent)
 {
 	setAttribute(Qt::WA_QuitOnClose, true);
 	ui.setupUi(this);
-
-	ui.languagePushButton->close();
 
 	// 珍珠状态
 	ui.posXLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
@@ -22,62 +24,60 @@ PearlCannonHelper::PearlCannonHelper(QWidget *parent): QMainWindow(parent)
 	ui.motionZLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
 
 	// 珍珠炮bit
-	ui.bitLineEdit0->setValidator(new QRegExpValidator(QRegExp("[0,1]{1,1}"), this));
-	ui.bitLineEdit1->setValidator(new QRegExpValidator(QRegExp("[0,1]{1,5}"), this));
-	ui.bitLineEdit2->setValidator(new QRegExpValidator(QRegExp("[0,1]{1,2}"), this));
-	ui.bitLineEdit3->setValidator(new QRegExpValidator(QRegExp("[0,1]{1,5}"), this));
+	ui.bitLineEdit->setValidator(new QRegExpValidator(QRegExp("([0,1]|){1,27}"), this));
 
 	// 输出条件
 	ui.groundYLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
-	ui.maxTickLineEdit->setValidator(new QRegExpValidator(QRegExp("\\d{1,9}"), this));
+	ui.maxTickLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expIntNumber), this));
 
-	// 初始化数据
-	m_pitch = m_amount1 = m_yaw = m_amount2 = 1;
-	changeFTLBit0("0", true);
-	changeFTLBit1("0", true);
-	changeFTLBit2("0", true);
-	changeFTLBit3("0", true);
+	// 珍珠炮信息
+	ui.pearlXLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
+	ui.pearlZLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
+	ui.PlayerYLineEdit->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
 
-	ui.amoutSpinBox1->setMaximum(settingGenerator.data.maxUnit);
-	ui.amoutSpinBox2->setMaximum(settingGenerator.data.maxUnit);
+	// 配置生成
+	ui.groundYLineEdit_2->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
+	ui.maxTickLineEdit_2->setValidator(new QRegExpValidator(QRegExp(StringHelper::expIntNumber), this));
 
-	// 同步设置生成器窗口间的数据
-	connect(ui.groundYLineEdit, SIGNAL(textEdited(QString)), &settingGenerator, SLOT(on_mainWindow_groundYLineEdit_textEdited(QString)));
-	connect(ui.maxTickLineEdit, SIGNAL(textEdited(QString)), &settingGenerator, SLOT(on_mainWindow_maxTickLineEdit_textEdited(QString)));
-	connect(&settingGenerator, SIGNAL(groundYLineEdit_textEdited(QString)), this, SLOT(on_settingWindow_groundYLineEdit_textEdited(QString)));
-	connect(&settingGenerator, SIGNAL(maxTickLineEdit_textEdited(QString)), this, SLOT(on_settingWindow_maxTickLineEdit_textEdited(QString)));
+	connect(ui.groundYLineEdit, SIGNAL(textEdited(QString)), ui.groundYLineEdit_2, SLOT(setText(QString)));
+	connect(ui.groundYLineEdit_2, SIGNAL(textEdited(QString)), ui.groundYLineEdit, SLOT(setText(QString)));
+	connect(ui.maxTickLineEdit, SIGNAL(textEdited(QString)), ui.maxTickLineEdit_2, SLOT(setText(QString)));
+	connect(ui.maxTickLineEdit_2, SIGNAL(textEdited(QString)), ui.maxTickLineEdit, SLOT(setText(QString)));	
 
-	// 从设置生成器窗口获取设置信息
-	connect(&settingGenerator, SIGNAL(sendSetting(QString)), this, SLOT(pasteSettingData(QString)));
+	connect(ui.displayMomentumCheckBox, SIGNAL(stateChanged(int)), this, SLOT(generateTrace()));
+
+	connect(ui.isStartFromExplosionCheckBox, SIGNAL(stateChanged(int)), this, SLOT(updatePearlInfo()));
+	connect(ui.pitchComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateSetting()));
+	connect(ui.directionComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateSetting()));
+	connect(ui.amoutSpinBox1, SIGNAL(valueChanged(int)), this, SLOT(updateSetting()));
+	connect(ui.amoutSpinBox2, SIGNAL(valueChanged(int)), this, SLOT(updateSetting()));
+
+	connect(ui.pearlXLineEdit, SIGNAL(textEdited(QString)), this, SLOT(updatePearlInfo()));
+	connect(ui.pearlZLineEdit, SIGNAL(textEdited(QString)), this, SLOT(updatePearlInfo()));
+	connect(ui.PlayerYLineEdit, SIGNAL(textEdited(QString)), this, SLOT(updatePearlInfo()));
+
+
+	ui.tabWidget->setTabPosition(QTabWidget::South);
+	ui.traceTableWidget->verticalHeader()->setDefaultAlignment(Qt::AlignCenter);
+	ui.traceTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+	ui.traceTableWidget->horizontalHeader()->setStretchLastSection(true);
+	ui.settingTableWidget->verticalHeader()->setDefaultAlignment(Qt::AlignCenter);
+	ui.settingTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+	ui.settingTableWidget->horizontalHeader()->setStretchLastSection(true);
+
+	loadSetting();
+	updateAll();
 }
 
-void PearlCannonHelper::on_settingWindow_groundYLineEdit_textEdited(QString text)
+QString getChunkString(vec3d pos)
 {
-	if (text == ui.groundYLineEdit->text()) return;
-	ui.groundYLineEdit->setText(text);
-}
-void PearlCannonHelper::on_settingWindow_maxTickLineEdit_textEdited(QString text)
-{
-	if (text == ui.maxTickLineEdit->text()) return;
-	ui.maxTickLineEdit->setText(text);
+	int x = int(floor(pos.x / 16));
+	int z = int(floor(pos.z / 16));
+	return QString("[%1, %2]").arg(x).arg(z);
 }
 
-QString PearlCannonHelper::getChunk(double x, double z)
-{
-	QString ret = "[" + QString::number(floor(x / 16), 'f', 0) 
-		+ "," + QString::number(floor(z / 16), 'f', 0) + "]";
-	return ret;
-}
-
-void PearlCannonHelper::on_tabWidget_currentChanged(int index)
-{
-	if (index == 1)
-	{
-		on_genOutputPushButton_clicked();
-	}
-}
 // in 1gt: [logger -> explode -> move -> drag -> gravity]
-void PearlCannonHelper::on_genOutputPushButton_clicked()
+void PearlCannonHelper::generateTrace()
 {
 	double _x = ui.posXLineEdit->text().toDouble();
 	double _y = ui.posYLineEdit->text().toDouble();
@@ -85,131 +85,65 @@ void PearlCannonHelper::on_genOutputPushButton_clicked()
 	double _mx = ui.motionXLineEdit->text().toDouble();
 	double _my = ui.motionYLineEdit->text().toDouble();
 	double _mz = ui.motionZLineEdit->text().toDouble();
-	LiteProjectile pearl(vec3d(_x, _y, _z), vec3d(_mx, _my, _mz));
+	Pearl pearl(vec3d(_x, _y, _z), vec3d(_mx, _my, _mz));
 	double groundY = ui.groundYLineEdit->text().toDouble();
 	double maxTick = ui.maxTickLineEdit->text().toInt();
 
-	QStandardItemModel *model = new QStandardItemModel;
-	ui.outputTableView->setModel(model);
-	model->setColumnCount(7);
-	for (int i = 0; i < 3; i++) ui.outputTableView->setColumnWidth(i, 118);
-	for (int i = 3; i < 4; i++) ui.outputTableView->setColumnWidth(i, 100);
-	for (int i = 4; i < 7; i++) ui.outputTableView->setColumnWidth(i, 100);
-	ui.outputTableView->verticalHeader()->setMinimumWidth(70);
-	ui.outputTableView->verticalHeader()->setDefaultAlignment(Qt::AlignCenter);
+	bool displayMomentum = ui.displayMomentumCheckBox->isChecked();
+	const int ColumnCount = 3 - (!displayMomentum);
+	ui.traceTableWidget->setRowCount(0);
+	ui.traceTableWidget->setColumnCount(ColumnCount);
 
-	QStringList column, row;
-	column << "PosX" << "PosY" << "PosZ" << "Chunk" << "MotionX" << "MotionY" << "MotionZ";
-	model->setHorizontalHeaderLabels(column); 
-	for (int i = 0; i <= maxTick && pearl.getY() >= groundY; i++)
-	{	
-		QList<QStandardItem *> list;
-		list.append(new QStandardItem(QString::number(pearl.getX(), 'f', 6)));
-		list.append(new QStandardItem(QString::number(pearl.getY(), 'f', 6)));
-		list.append(new QStandardItem(QString::number(pearl.getZ(), 'f', 6)));
-		list.append(new QStandardItem(getChunk(pearl.getX(), pearl.getZ())));
-		list.append(new QStandardItem(QString::number(pearl.getMx(), 'f', 6)));
-		list.append(new QStandardItem(QString::number(pearl.getMy(), 'f', 6)));
-		list.append(new QStandardItem(QString::number(pearl.getMz(), 'f', 6)));
-
-		model->appendRow(list); 
-		model->setHeaderData(i, Qt::Vertical, "Tick " + QString::number(i + 1));
-		for (int j = 0; j < 7; j++)
-		{
-			model->item(i, j)->setTextAlignment(Qt::AlignCenter);
-		}
-
+	QStringList column;
+	column << "Chunk" << "Position" << "Momentum";
+	ui.traceTableWidget->setHorizontalHeaderLabels(column);
+	for (int i = 0; i < maxTick && pearl.getY() >= groundY; i++)
+	{
+		ui.traceTableWidget->insertRow(ui.traceTableWidget->rowCount());
+		ui.traceTableWidget->setItem(i, 0, new QTableWidgetItem(getChunkString(pearl.getPosition())));
+		ui.traceTableWidget->setItem(i, 1, new QTableWidgetItem(pearl.getPosition().toString()));
+		if (displayMomentum) ui.traceTableWidget->setItem(i, 2, new QTableWidgetItem(pearl.getMomentum().toString()));
+		for (int j = 0; j < ColumnCount; j++) ui.traceTableWidget->item(i, j)->setTextAlignment(Qt::AlignCenter);
 		pearl.tick();
 	}
 }
 
-void PearlCannonHelper::changeFTLBit0(QString str, bool doAddPrefix)
+Pearl PearlCannonHelper::getPearl()
 {
-	int x = str.toInt(nullptr, 2);
-	if (m_pitch == x) return;
-	m_pitch = x;
-	if (doAddPrefix)
-	{
-		str = StringHelper::addPrefix(str, '0', 1);
-	}
-	ui.bitLineEdit0->setText(str);
-	ui.pitchComboBox->setCurrentIndex(x);
-}
-void PearlCannonHelper::changeFTLBit1(QString str, bool doAddPrefix)
-{
-	int x = StringHelper::reverse(str).toInt(nullptr, 2);
-	if (m_amount1 == x) return;
-	m_amount1 = x;
-	if (doAddPrefix)
-	{
-		str = StringHelper::addPrefix(str, '0', 5);
-	}
-	ui.bitLineEdit1->setText(str);
-	ui.amoutSpinBox1->setValue(x);
-}
-void PearlCannonHelper::changeFTLBit2(QString str, bool doAddPrefix)
-{
-	int x = str.toInt(nullptr, 2);
-	if (m_yaw == x) return;
-	m_yaw = x;
-	if (doAddPrefix)
-	{
-		str = StringHelper::addPrefix(str, '0', 2);
-	}
-	ui.bitLineEdit2->setText(str);
-	ui.yawComboBox->setCurrentIndex(x);
-}
-void PearlCannonHelper::changeFTLBit3(QString str, bool doAddPrefix)
-{
-	int x = str.toInt(nullptr, 2);
-	if (m_amount2 == x) return;
-	m_amount2 = x;
-	if (doAddPrefix)
-	{
-		str = StringHelper::addPrefix(str, '0', 5);
-	}
-	ui.bitLineEdit3->setText(str);
-	ui.amoutSpinBox2->setValue(x);
+	double x = ui.pearlXLineEdit->text().toDouble();
+	double y = ui.PlayerYLineEdit->text().toDouble();
+	double z = ui.pearlZLineEdit->text().toDouble();
+	return Pearl(vec3d(x, y, z) + Constant::delta_position[setting.pitch], Constant::motion[setting.pitch]);
 }
 
-void PearlCannonHelper::on_bitLineEdit0_textChanged(QString text)
+void PearlCannonHelper::loadSetting()
 {
-	changeFTLBit0(text, false);
-}
-void PearlCannonHelper::on_bitLineEdit1_textChanged(QString text)
-{
-	changeFTLBit1(text, false);
-}
-void PearlCannonHelper::on_bitLineEdit2_textChanged(QString text)
-{
-	changeFTLBit2(text, false);
-}
-void PearlCannonHelper::on_bitLineEdit3_textChanged(QString text)
-{
-	changeFTLBit3(text, false);
+	QSettings settings(Constant::iniFileName, QSettings::IniFormat);
+	ui.pearlXLineEdit->setText(settings.value("pearlX", ui.pearlXLineEdit->text()).toString());
+	ui.pearlZLineEdit->setText(settings.value("pearlZ", ui.pearlZLineEdit->text()).toString());
+	ui.PlayerYLineEdit->setText(settings.value("playerY", ui.PlayerYLineEdit->text()).toString());
+	ui.rotationComboBox->setCurrentIndex(settings.value("rotation", ui.rotationComboBox->currentIndex()).toInt());
+	ui.maxTNTSpinBox->setValue(settings.value("maxTNT", ui.maxTNTSpinBox->value()).toInt());
+	ui.groundYLineEdit->setText(settings.value("groundY", ui.groundYLineEdit->text()).toString());
+	ui.maxTickLineEdit->setText(settings.value("maxTickTime", ui.maxTickLineEdit->text()).toString());
 }
 
-void PearlCannonHelper::on_pitchComboBox_currentIndexChanged(int x)
+void PearlCannonHelper::saveSetting()
 {
-	changeFTLBit0(QString::number(x, 2), true);
-}
-void PearlCannonHelper::on_amoutSpinBox1_valueChanged(int x)
-{
-	changeFTLBit1(StringHelper::reverse(QString::number(x, 2)), true);
-}
-void PearlCannonHelper::on_yawComboBox_currentIndexChanged(int x)
-{
-	changeFTLBit2(QString::number(x, 2), true);
-}
-void PearlCannonHelper::on_amoutSpinBox2_valueChanged(int x)
-{
-	changeFTLBit3(QString::number(x, 2), true);
+	QSettings settings(Constant::iniFileName, QSettings::IniFormat);
+	settings.setValue("pearlX", ui.pearlXLineEdit->text());
+	settings.setValue("pearlZ", ui.pearlZLineEdit->text());
+	settings.setValue("playerY", ui.PlayerYLineEdit->text());
+	settings.setValue("rotation", ui.rotationComboBox->currentIndex());
+	settings.setValue("maxTNT", ui.maxTNTSpinBox->value());
+	settings.setValue("groundY", ui.groundYLineEdit->text());
+	settings.setValue("maxTickTime", ui.maxTickLineEdit->text());
 }
 
-void PearlCannonHelper::on_calcFTLPushButton_clicked()
+void PearlCannonHelper::updatePearlInfo()
 {
-	LiteProjectile pearl(settingGenerator.data.getSourcePos(m_pitch), settingGenerator.data.motion[m_pitch]);
-	pearl.accelerate(settingGenerator.data.getThrust(m_pitch, m_amount1, m_yaw, m_amount2));
+	Pearl pearl = getPearl();
+	pearl.accelerate(setting.getThrust());
 
 	if (!ui.isStartFromExplosionCheckBox->isChecked())
 	{
@@ -222,37 +156,157 @@ void PearlCannonHelper::on_calcFTLPushButton_clicked()
 	ui.motionXLineEdit->setText(QString::number(pearl.getMx(), 'f'));
 	ui.motionYLineEdit->setText(QString::number(pearl.getMy(), 'f'));
 	ui.motionZLineEdit->setText(QString::number(pearl.getMz(), 'f'));
+
+	ui.bitLineEdit->setText(setting.toString());
+	ui.pitchComboBox->setCurrentIndex(setting.pitch);
+	ui.directionComboBox->setCurrentIndex(setting.direction);
+	ui.amoutSpinBox1->setValue(setting.amount_l);
+	ui.amoutSpinBox2->setValue(setting.amount_r);
+
+	generateTrace();
+	saveSetting();
 }
-void PearlCannonHelper::on_genFromDestination_clicked()
+
+void PearlCannonHelper::updateSetting()
 {
-	settingGenerator.show();
+	setting.amount_l = ui.amoutSpinBox1->value();
+	setting.amount_r = ui.amoutSpinBox2->value();
+	setting.direction = ui.directionComboBox->currentIndex();
+	setting.pitch = ui.pitchComboBox->currentIndex();
+	updatePearlInfo();
 }
+
+void PearlCannonHelper::updateAll()
+{
+	on_genPushButton_clicked();
+	updatePearlInfo();
+}
+
 void PearlCannonHelper::on_copyBitPushButton_clicked()
 {
-	QString text;
-	text += ui.bitLineEdit0->text() + ' ';
-	text += ui.bitLineEdit1->text() + ' ';
-	text += ui.bitLineEdit2->text() + ' ';
-	text += ui.bitLineEdit3->text() + ' ';
-	QApplication::clipboard()->setText(text);
-}
-void PearlCannonHelper::pasteSettingData(QString str)
-{
-	QString setting;
-	for (auto i: str)
-		if (i == '0' || i == '1')
-			setting.append(i);
-	if (setting.length() != 13) return;
-
-	ui.bitLineEdit0->setText(setting.mid(0, 1));
-	ui.bitLineEdit1->setText(setting.mid(1, 5));
-	ui.bitLineEdit2->setText(setting.mid(6, 2));
-	ui.bitLineEdit3->setText(setting.mid(8, 5));
-
-	on_calcFTLPushButton_clicked();
+	QApplication::clipboard()->setText(setting.toString());
 }
 void PearlCannonHelper::on_pasteBitPushButton_clicked()
 {
 	QString text = QApplication::clipboard()->text();
-	pasteSettingData(text);
+	try
+	{
+		setting = Setting(text);
+		updateAll();
+	}
+	catch (...)
+	{
+		return;
+	}
+}
+
+bool cmp(const SortingData &a, const SortingData &b)
+{
+	return a.dis < b.dis;
+}
+
+bool inRange(int direction, double angle, double delta)
+{
+	const double pi = acos(-1);
+	double a1 = Setting(0, 1, direction, 0).getThrust().angle();
+	double a2 = Setting(1, 0, direction, 0).getThrust().angle();
+	if (a2 < a1) swap(a1, a2);
+	if (abs(a2 - a1) > pi) a1 += 2 * pi;
+	return max(a1, angle - delta) < min(a2, angle + delta);
+}
+
+void PearlCannonHelper::on_genPushButton_clicked()
+{
+	double dstPosX = ui.dstXLineEdit->text().toDouble();
+	double dstPosZ = ui.dstZLineEdit->text().toDouble();
+	int maxTNT = ui.maxTNTSpinBox->value();
+	int maxTick = ui.maxTickLineEdit_2->text().toInt();
+	double groundY = ui.groundYLineEdit_2->text().toInt();
+
+	Pearl pearl0 = getPearl();
+	double angle = (vec3d(dstPosX, pearl0.getY(), dstPosZ) - pearl0.getPosition()).angle();
+	double delta = 0.1 / maxTNT;
+	result.clear();
+	int cnt = 0;
+	for (int d = 0; d < 4; d++)
+		if (inRange(d, angle, delta))
+		{
+			int l = 0;
+			for (int i = 0; i <= maxTNT; i++)
+			{
+				bool flag_success = false, flag_break = false;
+				for (int j = l; !flag_break && j <= maxTNT; j++)
+					for (int p = 0; !flag_break && p < 2; p++)
+					{
+						cnt++;
+						Setting s = Setting(i, j, d, p);
+						double a = s.getThrust().angle();
+						if (!(abs(angle - a) < delta))
+						{
+							if (flag_success) flag_break = true;
+							continue;
+						}
+						if (!flag_success) l = j;
+						flag_success = true;
+						Pearl pearl = pearl0;
+						pearl.accelerate(s.getThrust());
+						pearl.tick();
+						double mn = 1e10;
+						SortingData best = SortingData{mn, pearl.getPosition(), -1, s};
+						for (int tick = 0; tick < maxTick; tick++)
+						{
+							pearl.tick();
+							if (pearl.getY() < groundY) break;
+							double dis = pearl.getPosition().distance(vec3d(dstPosX, pearl.getY(), dstPosZ));
+							if (dis < mn)
+							{
+								mn = dis;
+								best = SortingData{mn, pearl.getPosition(), tick + 1, s};
+							}
+						}
+						if (mn != 1e10) result.push_back(best);
+					}
+			}
+		}
+	sort(result.begin(), result.end(), cmp);
+	qDebug() << result.size() << ' ' << cnt;
+
+	// 输出至表格
+	QStringList column;
+	column << "Distance" << "Position" << "Tick" << "Num1" << "Num2" << "Total TNT";
+	int ColumnCount = column.length();
+	ui.settingTableWidget->setRowCount(0);
+	ui.settingTableWidget->setColumnCount(ColumnCount);
+	ui.settingTableWidget->setHorizontalHeaderLabels(column);
+	for (int i = 0; i < min(result.size(), 100); i++)
+	{
+		ui.settingTableWidget->insertRow(ui.settingTableWidget->rowCount());
+		ui.settingTableWidget->setItem(i, 0, new QTableWidgetItem(QString::number(result[i].dis, 'f', 4)));
+		ui.settingTableWidget->setItem(i, 1, new QTableWidgetItem(result[i].pos.toString()));
+		ui.settingTableWidget->setItem(i, 2, new QTableWidgetItem(QString::number(result[i].tick)));
+		ui.settingTableWidget->setItem(i, 3, new QTableWidgetItem(QString::number(result[i].setting.amount_l)));
+		ui.settingTableWidget->setItem(i, 4, new QTableWidgetItem(QString::number(result[i].setting.amount_r)));
+		ui.settingTableWidget->setItem(i, 5, new QTableWidgetItem(QString::number(result[i].setting.amount_l + result[i].setting.amount_r)));
+		for (int j = 0; j < ColumnCount; j++) ui.settingTableWidget->item(i, j)->setTextAlignment(Qt::AlignCenter);
+	}
+}
+
+void PearlCannonHelper::on_settingTableWidget_cellClicked(int row, int column)
+{
+	if (row == -1) return;
+	ui.selectedSettingBitsLineEdit->setText(result[row].setting.toString());
+}
+void PearlCannonHelper::on_applyPushButton_pressed()
+{
+	int row = ui.settingTableWidget->currentRow();
+	if (row == -1) return;
+	setting = result[row].setting;
+	updatePearlInfo();
+	ui.tabWidget->setCurrentIndex(1);
+}
+
+void PearlCannonHelper::on_rotationComboBox_currentTextChanged()
+{
+	setting.rotation = ui.rotationComboBox->currentIndex();
+	updateAll();
 }

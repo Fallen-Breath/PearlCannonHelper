@@ -41,19 +41,19 @@
     <ClCompile Include="PearlCannonHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SettingGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LiteProjectile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="vec3d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StringHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FTLData.cpp">
+    <ClCompile Include="Constant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Setting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pearl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -61,15 +61,9 @@
     <QtMoc Include="PearlCannonHelper.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="SettingGenerator.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="PearlCannonHelper.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="SettingGenerator.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -82,16 +76,19 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LiteProjectile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="vec3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StringHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FTLData.h">
+    <ClInclude Include="Constant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Setting.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pearl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

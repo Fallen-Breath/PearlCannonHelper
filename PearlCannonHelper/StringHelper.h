@@ -1,11 +1,11 @@
-#pragma once
+﻿#pragma once
 
 #include <QString>
 
-namespace StringHelper
+class StringHelper
 {
-	const QString expRealNumber = "^-?\\d+\\.?\\d*$";
-	QString reverse(const QString &);
-	QString addPrefix(QString, QChar, int);
-}
-
+public:
+	static const QString expRealNumber;
+	static const QString expIntNumber;
+	static QString reverse(const QString &);
+};

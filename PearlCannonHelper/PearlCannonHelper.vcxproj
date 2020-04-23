@@ -210,12 +210,12 @@
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="LiteProjectile.cpp" />
+    <ClCompile Include="Pearl.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PearlCannonHelper.cpp" />
-    <ClCompile Include="SettingGenerator.cpp" />
+    <ClCompile Include="Setting.cpp" />
     <ClCompile Include="StringHelper.cpp" />
-    <ClCompile Include="FTLData.cpp" />
+    <ClCompile Include="Constant.cpp" />
     <ClCompile Include="vec3d.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -223,23 +223,17 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="PearlCannonHelper.ui" />
-    <QtUic Include="SettingGenerator.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="PearlCannonHelper.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LiteProjectile.h" />
+    <ClInclude Include="Pearl.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Setting.h" />
     <ClInclude Include="StringHelper.h" />
-    <ClInclude Include="FTLData.h" />
+    <ClInclude Include="Constant.h" />
     <ClInclude Include="vec3d.h" />
-    <QtMoc Include="SettingGenerator.h">
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
-      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
-    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PearlCannonHelper.rc" />

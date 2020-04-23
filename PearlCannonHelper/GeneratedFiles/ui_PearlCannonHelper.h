@@ -25,7 +25,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QTabWidget>
-#include <QtWidgets/QTableView>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -35,12 +35,46 @@ class Ui_PearlCannonHelperClass
 {
 public:
     QWidget *centralWidget;
-    QVBoxLayout *verticalLayout;
-    QTabWidget *tabWidget;
-    QWidget *tab;
     QVBoxLayout *verticalLayout_7;
-    QHBoxLayout *horizontalLayout_12;
-    QSpacerItem *horizontalSpacer;
+    QTabWidget *tabWidget;
+    QWidget *tab_2;
+    QVBoxLayout *verticalLayout_5;
+    QHBoxLayout *horizontalLayout_5;
+    QVBoxLayout *verticalLayout_4;
+    QGroupBox *groupBox_3;
+    QGridLayout *gridLayout_4;
+    QLineEdit *pearlZLineEdit;
+    QLabel *rotationLabel;
+    QLineEdit *pearlXLineEdit;
+    QLabel *pearlZLabel;
+    QLineEdit *PlayerYLineEdit;
+    QComboBox *rotationComboBox;
+    QLabel *pearlXLabel;
+    QLabel *PlayerYLabel;
+    QGroupBox *groupBox;
+    QGridLayout *gridLayout_5;
+    QLabel *posZLabel_3;
+    QLineEdit *dstXLineEdit;
+    QLabel *posXLabel_3;
+    QLineEdit *dstZLineEdit;
+    QVBoxLayout *verticalLayout;
+    QGroupBox *groupBox_4;
+    QGridLayout *gridLayout_6;
+    QLabel *maxUnitLabel;
+    QLabel *groundYLabel_2;
+    QLineEdit *maxTickLineEdit_2;
+    QLineEdit *groundYLineEdit_2;
+    QSpinBox *maxTNTSpinBox;
+    QLabel *maxTickLabel_2;
+    QLineEdit *selectedSettingBitsLineEdit;
+    QGridLayout *gridLayout_7;
+    QPushButton *applyPushButton;
+    QSpacerItem *horizontalSpacer_4;
+    QPushButton *genPushButton;
+    QSpacerItem *horizontalSpacer_6;
+    QTableWidget *settingTableWidget;
+    QWidget *tab;
+    QVBoxLayout *verticalLayout_6;
     QHBoxLayout *horizontalLayout_2;
     QGroupBox *posGroupBox;
     QGridLayout *gridLayout;
@@ -58,65 +92,47 @@ public:
     QLineEdit *motionZLineEdit;
     QLineEdit *motionYLineEdit;
     QLabel *motionZLabel;
-    QSpacerItem *horizontalSpacer_2;
-    QGroupBox *groupBox_2;
-    QVBoxLayout *verticalLayout_4;
-    QVBoxLayout *verticalLayout_2;
-    QHBoxLayout *horizontalLayout_4;
-    QLabel *label_2;
-    QLineEdit *bitLineEdit0;
-    QLineEdit *bitLineEdit1;
-    QLineEdit *bitLineEdit2;
-    QLineEdit *bitLineEdit3;
-    QHBoxLayout *horizontalLayout;
-    QPushButton *copyBitPushButton;
-    QPushButton *pasteBitPushButton;
-    QPushButton *genFromDestination;
-    QSpacerItem *horizontalSpacer_12;
-    QGridLayout *gridLayout_10;
-    QHBoxLayout *horizontalLayout_9;
-    QLabel *label_6;
-    QComboBox *yawComboBox;
-    QSpacerItem *horizontalSpacer_9;
-    QSpacerItem *horizontalSpacer_5;
-    QHBoxLayout *horizontalLayout_8;
-    QLabel *amoutLabel1;
-    QSpinBox *amoutSpinBox1;
-    QSpacerItem *horizontalSpacer_8;
-    QSpacerItem *horizontalSpacer_4;
-    QHBoxLayout *horizontalLayout_6;
-    QLabel *label_3;
-    QComboBox *pitchComboBox;
-    QSpacerItem *horizontalSpacer_7;
-    QSpacerItem *horizontalSpacer_3;
-    QHBoxLayout *horizontalLayout_7;
-    QLabel *amoutLabel2;
-    QSpinBox *amoutSpinBox2;
-    QSpacerItem *horizontalSpacer_10;
-    QSpacerItem *horizontalSpacer_6;
-    QPushButton *calcFTLPushButton;
-    QCheckBox *isStartFromExplosionCheckBox;
-    QWidget *tab_3;
-    QVBoxLayout *verticalLayout_3;
-    QHBoxLayout *horizontalLayout_3;
-    QGridLayout *gridLayout_3;
+    QGroupBox *groupBox_5;
+    QGridLayout *gridLayout_8;
     QLabel *groundYLabel;
     QLineEdit *groundYLineEdit;
     QLabel *maxTickLabel;
     QLineEdit *maxTickLineEdit;
-    QSpacerItem *horizontalSpacer_11;
-    QPushButton *genOutputPushButton;
-    QTableView *outputTableView;
-    QHBoxLayout *horizontalLayout_5;
-    QPushButton *languagePushButton;
-    QSpacerItem *horizontalSpacer_13;
+    QGroupBox *groupBox_2;
+    QVBoxLayout *verticalLayout_3;
+    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout_4;
+    QLabel *label_2;
+    QLineEdit *bitLineEdit;
+    QHBoxLayout *horizontalLayout;
+    QSpacerItem *horizontalSpacer_3;
+    QPushButton *copyBitPushButton;
+    QPushButton *pasteBitPushButton;
+    QSpacerItem *horizontalSpacer_5;
+    QGridLayout *gridLayout_3;
+    QHBoxLayout *horizontalLayout_8;
+    QLabel *amoutLabel1;
+    QSpinBox *amoutSpinBox1;
+    QHBoxLayout *horizontalLayout_7;
+    QLabel *amoutLabel2;
+    QSpinBox *amoutSpinBox2;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *label_3;
+    QComboBox *pitchComboBox;
+    QCheckBox *isStartFromExplosionCheckBox;
+    QHBoxLayout *horizontalLayout_9;
+    QLabel *label_6;
+    QComboBox *directionComboBox;
+    QHBoxLayout *horizontalLayout_11;
+    QCheckBox *displayMomentumCheckBox;
+    QTableWidget *traceTableWidget;
     QLabel *CreditLabel;
 
     void setupUi(QMainWindow *PearlCannonHelperClass)
     {
         if (PearlCannonHelperClass->objectName().isEmpty())
             PearlCannonHelperClass->setObjectName(QString::fromUtf8("PearlCannonHelperClass"));
-        PearlCannonHelperClass->resize(896, 538);
+        PearlCannonHelperClass->resize(570, 797);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -127,98 +143,339 @@ public:
         PearlCannonHelperClass->setWindowIcon(icon);
         centralWidget = new QWidget(PearlCannonHelperClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        verticalLayout = new QVBoxLayout(centralWidget);
-        verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        tabWidget = new QTabWidget(centralWidget);
-        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
-        QFont font;
-        font.setFamily(QString::fromUtf8("\345\256\213\344\275\223"));
-        font.setPointSize(11);
-        tabWidget->setFont(font);
-        tab = new QWidget();
-        tab->setObjectName(QString::fromUtf8("tab"));
-        verticalLayout_7 = new QVBoxLayout(tab);
+        verticalLayout_7 = new QVBoxLayout(centralWidget);
         verticalLayout_7->setSpacing(6);
         verticalLayout_7->setContentsMargins(11, 11, 11, 11);
         verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
-        horizontalLayout_12 = new QHBoxLayout();
-        horizontalLayout_12->setSpacing(6);
-        horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        tabWidget = new QTabWidget(centralWidget);
+        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        QFont font;
+        font.setPointSize(9);
+        tabWidget->setFont(font);
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QString::fromUtf8("tab_2"));
+        verticalLayout_5 = new QVBoxLayout(tab_2);
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        groupBox_3 = new QGroupBox(tab_2);
+        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Minimum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(groupBox_3->sizePolicy().hasHeightForWidth());
+        groupBox_3->setSizePolicy(sizePolicy1);
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("\345\256\213\344\275\223"));
+        font1.setPointSize(9);
+        groupBox_3->setFont(font1);
+        gridLayout_4 = new QGridLayout(groupBox_3);
+        gridLayout_4->setSpacing(6);
+        gridLayout_4->setContentsMargins(11, 11, 11, 11);
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        pearlZLineEdit = new QLineEdit(groupBox_3);
+        pearlZLineEdit->setObjectName(QString::fromUtf8("pearlZLineEdit"));
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(pearlZLineEdit->sizePolicy().hasHeightForWidth());
+        pearlZLineEdit->setSizePolicy(sizePolicy2);
+        pearlZLineEdit->setFont(font1);
+        pearlZLineEdit->setReadOnly(false);
 
-        horizontalLayout_12->addItem(horizontalSpacer);
+        gridLayout_4->addWidget(pearlZLineEdit, 1, 1, 1, 2);
 
+        rotationLabel = new QLabel(groupBox_3);
+        rotationLabel->setObjectName(QString::fromUtf8("rotationLabel"));
+        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(rotationLabel->sizePolicy().hasHeightForWidth());
+        rotationLabel->setSizePolicy(sizePolicy3);
+
+        gridLayout_4->addWidget(rotationLabel, 3, 0, 1, 2);
+
+        pearlXLineEdit = new QLineEdit(groupBox_3);
+        pearlXLineEdit->setObjectName(QString::fromUtf8("pearlXLineEdit"));
+        sizePolicy2.setHeightForWidth(pearlXLineEdit->sizePolicy().hasHeightForWidth());
+        pearlXLineEdit->setSizePolicy(sizePolicy2);
+        pearlXLineEdit->setFont(font1);
+        pearlXLineEdit->setReadOnly(false);
+
+        gridLayout_4->addWidget(pearlXLineEdit, 0, 1, 1, 2);
+
+        pearlZLabel = new QLabel(groupBox_3);
+        pearlZLabel->setObjectName(QString::fromUtf8("pearlZLabel"));
+        sizePolicy3.setHeightForWidth(pearlZLabel->sizePolicy().hasHeightForWidth());
+        pearlZLabel->setSizePolicy(sizePolicy3);
+        pearlZLabel->setFont(font1);
+        pearlZLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_4->addWidget(pearlZLabel, 1, 0, 1, 1);
+
+        PlayerYLineEdit = new QLineEdit(groupBox_3);
+        PlayerYLineEdit->setObjectName(QString::fromUtf8("PlayerYLineEdit"));
+        sizePolicy2.setHeightForWidth(PlayerYLineEdit->sizePolicy().hasHeightForWidth());
+        PlayerYLineEdit->setSizePolicy(sizePolicy2);
+        PlayerYLineEdit->setMinimumSize(QSize(0, 0));
+        PlayerYLineEdit->setMaximumSize(QSize(16777215, 16777215));
+        PlayerYLineEdit->setFont(font);
+
+        gridLayout_4->addWidget(PlayerYLineEdit, 2, 1, 1, 2);
+
+        rotationComboBox = new QComboBox(groupBox_3);
+        rotationComboBox->addItem(QString());
+        rotationComboBox->addItem(QString());
+        rotationComboBox->addItem(QString());
+        rotationComboBox->addItem(QString());
+        rotationComboBox->setObjectName(QString::fromUtf8("rotationComboBox"));
+        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(rotationComboBox->sizePolicy().hasHeightForWidth());
+        rotationComboBox->setSizePolicy(sizePolicy4);
+
+        gridLayout_4->addWidget(rotationComboBox, 3, 2, 1, 1);
+
+        pearlXLabel = new QLabel(groupBox_3);
+        pearlXLabel->setObjectName(QString::fromUtf8("pearlXLabel"));
+        sizePolicy3.setHeightForWidth(pearlXLabel->sizePolicy().hasHeightForWidth());
+        pearlXLabel->setSizePolicy(sizePolicy3);
+        pearlXLabel->setFont(font1);
+        pearlXLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_4->addWidget(pearlXLabel, 0, 0, 1, 1);
+
+        PlayerYLabel = new QLabel(groupBox_3);
+        PlayerYLabel->setObjectName(QString::fromUtf8("PlayerYLabel"));
+        PlayerYLabel->setFont(font);
+
+        gridLayout_4->addWidget(PlayerYLabel, 2, 0, 1, 1);
+
+
+        verticalLayout_4->addWidget(groupBox_3);
+
+        groupBox = new QGroupBox(tab_2);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setFont(font1);
+        gridLayout_5 = new QGridLayout(groupBox);
+        gridLayout_5->setSpacing(6);
+        gridLayout_5->setContentsMargins(11, 11, 11, 11);
+        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        posZLabel_3 = new QLabel(groupBox);
+        posZLabel_3->setObjectName(QString::fromUtf8("posZLabel_3"));
+        sizePolicy3.setHeightForWidth(posZLabel_3->sizePolicy().hasHeightForWidth());
+        posZLabel_3->setSizePolicy(sizePolicy3);
+        posZLabel_3->setFont(font1);
+        posZLabel_3->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(posZLabel_3, 1, 0, 1, 1);
+
+        dstXLineEdit = new QLineEdit(groupBox);
+        dstXLineEdit->setObjectName(QString::fromUtf8("dstXLineEdit"));
+        sizePolicy2.setHeightForWidth(dstXLineEdit->sizePolicy().hasHeightForWidth());
+        dstXLineEdit->setSizePolicy(sizePolicy2);
+        dstXLineEdit->setFont(font1);
+
+        gridLayout_5->addWidget(dstXLineEdit, 0, 1, 1, 2);
+
+        posXLabel_3 = new QLabel(groupBox);
+        posXLabel_3->setObjectName(QString::fromUtf8("posXLabel_3"));
+        sizePolicy3.setHeightForWidth(posXLabel_3->sizePolicy().hasHeightForWidth());
+        posXLabel_3->setSizePolicy(sizePolicy3);
+        posXLabel_3->setFont(font1);
+        posXLabel_3->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_5->addWidget(posXLabel_3, 0, 0, 1, 1);
+
+        dstZLineEdit = new QLineEdit(groupBox);
+        dstZLineEdit->setObjectName(QString::fromUtf8("dstZLineEdit"));
+        sizePolicy2.setHeightForWidth(dstZLineEdit->sizePolicy().hasHeightForWidth());
+        dstZLineEdit->setSizePolicy(sizePolicy2);
+        dstZLineEdit->setFont(font1);
+
+        gridLayout_5->addWidget(dstZLineEdit, 1, 1, 1, 2);
+
+
+        verticalLayout_4->addWidget(groupBox);
+
+
+        horizontalLayout_5->addLayout(verticalLayout_4);
+
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        groupBox_4 = new QGroupBox(tab_2);
+        groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
+        sizePolicy1.setHeightForWidth(groupBox_4->sizePolicy().hasHeightForWidth());
+        groupBox_4->setSizePolicy(sizePolicy1);
+        groupBox_4->setFont(font);
+        gridLayout_6 = new QGridLayout(groupBox_4);
+        gridLayout_6->setSpacing(6);
+        gridLayout_6->setContentsMargins(11, 11, 11, 11);
+        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
+        maxUnitLabel = new QLabel(groupBox_4);
+        maxUnitLabel->setObjectName(QString::fromUtf8("maxUnitLabel"));
+        sizePolicy3.setHeightForWidth(maxUnitLabel->sizePolicy().hasHeightForWidth());
+        maxUnitLabel->setSizePolicy(sizePolicy3);
+        maxUnitLabel->setFont(font1);
+        maxUnitLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_6->addWidget(maxUnitLabel, 0, 0, 1, 1);
+
+        groundYLabel_2 = new QLabel(groupBox_4);
+        groundYLabel_2->setObjectName(QString::fromUtf8("groundYLabel_2"));
+        groundYLabel_2->setFont(font1);
+
+        gridLayout_6->addWidget(groundYLabel_2, 1, 0, 1, 1);
+
+        maxTickLineEdit_2 = new QLineEdit(groupBox_4);
+        maxTickLineEdit_2->setObjectName(QString::fromUtf8("maxTickLineEdit_2"));
+        maxTickLineEdit_2->setFont(font1);
+
+        gridLayout_6->addWidget(maxTickLineEdit_2, 2, 1, 1, 1);
+
+        groundYLineEdit_2 = new QLineEdit(groupBox_4);
+        groundYLineEdit_2->setObjectName(QString::fromUtf8("groundYLineEdit_2"));
+        groundYLineEdit_2->setFont(font1);
+
+        gridLayout_6->addWidget(groundYLineEdit_2, 1, 1, 1, 1);
+
+        maxTNTSpinBox = new QSpinBox(groupBox_4);
+        maxTNTSpinBox->setObjectName(QString::fromUtf8("maxTNTSpinBox"));
+        maxTNTSpinBox->setFont(font);
+        maxTNTSpinBox->setMaximum(1820);
+        maxTNTSpinBox->setValue(1040);
+
+        gridLayout_6->addWidget(maxTNTSpinBox, 0, 1, 1, 1);
+
+        maxTickLabel_2 = new QLabel(groupBox_4);
+        maxTickLabel_2->setObjectName(QString::fromUtf8("maxTickLabel_2"));
+        maxTickLabel_2->setFont(font1);
+
+        gridLayout_6->addWidget(maxTickLabel_2, 2, 0, 1, 1);
+
+
+        verticalLayout->addWidget(groupBox_4);
+
+        selectedSettingBitsLineEdit = new QLineEdit(tab_2);
+        selectedSettingBitsLineEdit->setObjectName(QString::fromUtf8("selectedSettingBitsLineEdit"));
+        selectedSettingBitsLineEdit->setReadOnly(true);
+
+        verticalLayout->addWidget(selectedSettingBitsLineEdit);
+
+        gridLayout_7 = new QGridLayout();
+        gridLayout_7->setSpacing(6);
+        gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
+        applyPushButton = new QPushButton(tab_2);
+        applyPushButton->setObjectName(QString::fromUtf8("applyPushButton"));
+        applyPushButton->setFont(font);
+
+        gridLayout_7->addWidget(applyPushButton, 1, 1, 1, 1);
+
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_7->addItem(horizontalSpacer_4, 0, 0, 1, 1);
+
+        genPushButton = new QPushButton(tab_2);
+        genPushButton->setObjectName(QString::fromUtf8("genPushButton"));
+        sizePolicy2.setHeightForWidth(genPushButton->sizePolicy().hasHeightForWidth());
+        genPushButton->setSizePolicy(sizePolicy2);
+        genPushButton->setFont(font);
+
+        gridLayout_7->addWidget(genPushButton, 0, 1, 1, 1);
+
+        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_7->addItem(horizontalSpacer_6, 0, 2, 1, 1);
+
+
+        verticalLayout->addLayout(gridLayout_7);
+
+
+        horizontalLayout_5->addLayout(verticalLayout);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_5);
+
+        settingTableWidget = new QTableWidget(tab_2);
+        settingTableWidget->setObjectName(QString::fromUtf8("settingTableWidget"));
+
+        verticalLayout_5->addWidget(settingTableWidget);
+
+        tabWidget->addTab(tab_2, QString());
+        tab = new QWidget();
+        tab->setObjectName(QString::fromUtf8("tab"));
+        verticalLayout_6 = new QVBoxLayout(tab);
+        verticalLayout_6->setSpacing(6);
+        verticalLayout_6->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         posGroupBox = new QGroupBox(tab);
         posGroupBox->setObjectName(QString::fromUtf8("posGroupBox"));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Expanding);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(posGroupBox->sizePolicy().hasHeightForWidth());
         posGroupBox->setSizePolicy(sizePolicy1);
-        posGroupBox->setFont(font);
+        posGroupBox->setFont(font1);
         gridLayout = new QGridLayout(posGroupBox);
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         posYLabel = new QLabel(posGroupBox);
         posYLabel->setObjectName(QString::fromUtf8("posYLabel"));
-        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Preferred);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(posYLabel->sizePolicy().hasHeightForWidth());
-        posYLabel->setSizePolicy(sizePolicy2);
-        posYLabel->setFont(font);
-        posYLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        sizePolicy3.setHeightForWidth(posYLabel->sizePolicy().hasHeightForWidth());
+        posYLabel->setSizePolicy(sizePolicy3);
+        posYLabel->setFont(font1);
+        posYLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
 
         gridLayout->addWidget(posYLabel, 1, 0, 1, 1);
 
         posYLineEdit = new QLineEdit(posGroupBox);
         posYLineEdit->setObjectName(QString::fromUtf8("posYLineEdit"));
-        QSizePolicy sizePolicy3(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(posYLineEdit->sizePolicy().hasHeightForWidth());
-        posYLineEdit->setSizePolicy(sizePolicy3);
-        posYLineEdit->setFont(font);
+        sizePolicy2.setHeightForWidth(posYLineEdit->sizePolicy().hasHeightForWidth());
+        posYLineEdit->setSizePolicy(sizePolicy2);
+        posYLineEdit->setFont(font1);
 
         gridLayout->addWidget(posYLineEdit, 1, 1, 1, 1);
 
         posXLabel = new QLabel(posGroupBox);
         posXLabel->setObjectName(QString::fromUtf8("posXLabel"));
-        sizePolicy2.setHeightForWidth(posXLabel->sizePolicy().hasHeightForWidth());
-        posXLabel->setSizePolicy(sizePolicy2);
-        posXLabel->setFont(font);
-        posXLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        sizePolicy3.setHeightForWidth(posXLabel->sizePolicy().hasHeightForWidth());
+        posXLabel->setSizePolicy(sizePolicy3);
+        posXLabel->setFont(font1);
+        posXLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
 
         gridLayout->addWidget(posXLabel, 0, 0, 1, 1);
 
         posZLineEdit = new QLineEdit(posGroupBox);
         posZLineEdit->setObjectName(QString::fromUtf8("posZLineEdit"));
-        sizePolicy3.setHeightForWidth(posZLineEdit->sizePolicy().hasHeightForWidth());
-        posZLineEdit->setSizePolicy(sizePolicy3);
-        posZLineEdit->setFont(font);
+        sizePolicy2.setHeightForWidth(posZLineEdit->sizePolicy().hasHeightForWidth());
+        posZLineEdit->setSizePolicy(sizePolicy2);
+        posZLineEdit->setFont(font1);
 
         gridLayout->addWidget(posZLineEdit, 2, 1, 1, 1);
 
         posXLineEdit = new QLineEdit(posGroupBox);
         posXLineEdit->setObjectName(QString::fromUtf8("posXLineEdit"));
-        sizePolicy3.setHeightForWidth(posXLineEdit->sizePolicy().hasHeightForWidth());
-        posXLineEdit->setSizePolicy(sizePolicy3);
-        posXLineEdit->setFont(font);
+        sizePolicy2.setHeightForWidth(posXLineEdit->sizePolicy().hasHeightForWidth());
+        posXLineEdit->setSizePolicy(sizePolicy2);
+        posXLineEdit->setFont(font1);
 
         gridLayout->addWidget(posXLineEdit, 0, 1, 1, 1);
 
         posZLabel = new QLabel(posGroupBox);
         posZLabel->setObjectName(QString::fromUtf8("posZLabel"));
-        sizePolicy2.setHeightForWidth(posZLabel->sizePolicy().hasHeightForWidth());
-        posZLabel->setSizePolicy(sizePolicy2);
-        posZLabel->setFont(font);
-        posZLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        sizePolicy3.setHeightForWidth(posZLabel->sizePolicy().hasHeightForWidth());
+        posZLabel->setSizePolicy(sizePolicy3);
+        posZLabel->setFont(font1);
+        posZLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
 
         gridLayout->addWidget(posZLabel, 2, 0, 1, 1);
 
@@ -227,83 +484,110 @@ public:
 
         motionGroupBox = new QGroupBox(tab);
         motionGroupBox->setObjectName(QString::fromUtf8("motionGroupBox"));
-        motionGroupBox->setFont(font);
+        motionGroupBox->setFont(font1);
         gridLayout_2 = new QGridLayout(motionGroupBox);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         motionXLineEdit = new QLineEdit(motionGroupBox);
         motionXLineEdit->setObjectName(QString::fromUtf8("motionXLineEdit"));
-        sizePolicy3.setHeightForWidth(motionXLineEdit->sizePolicy().hasHeightForWidth());
-        motionXLineEdit->setSizePolicy(sizePolicy3);
-        motionXLineEdit->setFont(font);
+        sizePolicy2.setHeightForWidth(motionXLineEdit->sizePolicy().hasHeightForWidth());
+        motionXLineEdit->setSizePolicy(sizePolicy2);
+        motionXLineEdit->setFont(font1);
 
         gridLayout_2->addWidget(motionXLineEdit, 0, 1, 1, 1);
 
         motionXLabel = new QLabel(motionGroupBox);
         motionXLabel->setObjectName(QString::fromUtf8("motionXLabel"));
-        sizePolicy2.setHeightForWidth(motionXLabel->sizePolicy().hasHeightForWidth());
-        motionXLabel->setSizePolicy(sizePolicy2);
-        motionXLabel->setFont(font);
-        motionXLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        sizePolicy3.setHeightForWidth(motionXLabel->sizePolicy().hasHeightForWidth());
+        motionXLabel->setSizePolicy(sizePolicy3);
+        motionXLabel->setFont(font1);
+        motionXLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
 
         gridLayout_2->addWidget(motionXLabel, 0, 0, 1, 1);
 
         motionYLabel = new QLabel(motionGroupBox);
         motionYLabel->setObjectName(QString::fromUtf8("motionYLabel"));
-        sizePolicy2.setHeightForWidth(motionYLabel->sizePolicy().hasHeightForWidth());
-        motionYLabel->setSizePolicy(sizePolicy2);
-        motionYLabel->setFont(font);
-        motionYLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        sizePolicy3.setHeightForWidth(motionYLabel->sizePolicy().hasHeightForWidth());
+        motionYLabel->setSizePolicy(sizePolicy3);
+        motionYLabel->setFont(font1);
+        motionYLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
 
         gridLayout_2->addWidget(motionYLabel, 1, 0, 1, 1);
 
         motionZLineEdit = new QLineEdit(motionGroupBox);
         motionZLineEdit->setObjectName(QString::fromUtf8("motionZLineEdit"));
-        sizePolicy3.setHeightForWidth(motionZLineEdit->sizePolicy().hasHeightForWidth());
-        motionZLineEdit->setSizePolicy(sizePolicy3);
-        motionZLineEdit->setFont(font);
+        sizePolicy2.setHeightForWidth(motionZLineEdit->sizePolicy().hasHeightForWidth());
+        motionZLineEdit->setSizePolicy(sizePolicy2);
+        motionZLineEdit->setFont(font1);
 
         gridLayout_2->addWidget(motionZLineEdit, 2, 1, 1, 1);
 
         motionYLineEdit = new QLineEdit(motionGroupBox);
         motionYLineEdit->setObjectName(QString::fromUtf8("motionYLineEdit"));
-        sizePolicy3.setHeightForWidth(motionYLineEdit->sizePolicy().hasHeightForWidth());
-        motionYLineEdit->setSizePolicy(sizePolicy3);
-        motionYLineEdit->setFont(font);
+        sizePolicy2.setHeightForWidth(motionYLineEdit->sizePolicy().hasHeightForWidth());
+        motionYLineEdit->setSizePolicy(sizePolicy2);
+        motionYLineEdit->setFont(font1);
 
         gridLayout_2->addWidget(motionYLineEdit, 1, 1, 1, 1);
 
         motionZLabel = new QLabel(motionGroupBox);
         motionZLabel->setObjectName(QString::fromUtf8("motionZLabel"));
-        sizePolicy2.setHeightForWidth(motionZLabel->sizePolicy().hasHeightForWidth());
-        motionZLabel->setSizePolicy(sizePolicy2);
-        motionZLabel->setFont(font);
-        motionZLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        sizePolicy3.setHeightForWidth(motionZLabel->sizePolicy().hasHeightForWidth());
+        motionZLabel->setSizePolicy(sizePolicy3);
+        motionZLabel->setFont(font1);
+        motionZLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
 
         gridLayout_2->addWidget(motionZLabel, 2, 0, 1, 1);
 
 
         horizontalLayout_2->addWidget(motionGroupBox);
 
+        groupBox_5 = new QGroupBox(tab);
+        groupBox_5->setObjectName(QString::fromUtf8("groupBox_5"));
+        gridLayout_8 = new QGridLayout(groupBox_5);
+        gridLayout_8->setSpacing(6);
+        gridLayout_8->setContentsMargins(11, 11, 11, 11);
+        gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
+        groundYLabel = new QLabel(groupBox_5);
+        groundYLabel->setObjectName(QString::fromUtf8("groundYLabel"));
+        groundYLabel->setFont(font1);
 
-        horizontalLayout_12->addLayout(horizontalLayout_2);
+        gridLayout_8->addWidget(groundYLabel, 0, 0, 1, 1);
 
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        groundYLineEdit = new QLineEdit(groupBox_5);
+        groundYLineEdit->setObjectName(QString::fromUtf8("groundYLineEdit"));
+        groundYLineEdit->setFont(font1);
 
-        horizontalLayout_12->addItem(horizontalSpacer_2);
+        gridLayout_8->addWidget(groundYLineEdit, 0, 1, 1, 1);
+
+        maxTickLabel = new QLabel(groupBox_5);
+        maxTickLabel->setObjectName(QString::fromUtf8("maxTickLabel"));
+        maxTickLabel->setFont(font1);
+
+        gridLayout_8->addWidget(maxTickLabel, 1, 0, 1, 1);
+
+        maxTickLineEdit = new QLineEdit(groupBox_5);
+        maxTickLineEdit->setObjectName(QString::fromUtf8("maxTickLineEdit"));
+        maxTickLineEdit->setFont(font1);
+
+        gridLayout_8->addWidget(maxTickLineEdit, 1, 1, 1, 1);
 
 
-        verticalLayout_7->addLayout(horizontalLayout_12);
+        horizontalLayout_2->addWidget(groupBox_5);
+
+
+        verticalLayout_6->addLayout(horizontalLayout_2);
 
         groupBox_2 = new QGroupBox(tab);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        sizePolicy1.setHeightForWidth(groupBox_2->sizePolicy().hasHeightForWidth());
-        groupBox_2->setSizePolicy(sizePolicy1);
-        verticalLayout_4 = new QVBoxLayout(groupBox_2);
-        verticalLayout_4->setSpacing(6);
-        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        sizePolicy.setHeightForWidth(groupBox_2->sizePolicy().hasHeightForWidth());
+        groupBox_2->setSizePolicy(sizePolicy);
+        groupBox_2->setFont(font);
+        verticalLayout_3 = new QVBoxLayout(groupBox_2);
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
@@ -312,35 +596,25 @@ public:
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         label_2 = new QLabel(groupBox_2);
         label_2->setObjectName(QString::fromUtf8("label_2"));
+        QSizePolicy sizePolicy5(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy5);
+        label_2->setFont(font);
 
         horizontalLayout_4->addWidget(label_2);
 
-        bitLineEdit0 = new QLineEdit(groupBox_2);
-        bitLineEdit0->setObjectName(QString::fromUtf8("bitLineEdit0"));
-        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        sizePolicy4.setHorizontalStretch(1);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(bitLineEdit0->sizePolicy().hasHeightForWidth());
-        bitLineEdit0->setSizePolicy(sizePolicy4);
+        bitLineEdit = new QLineEdit(groupBox_2);
+        bitLineEdit->setObjectName(QString::fromUtf8("bitLineEdit"));
+        QSizePolicy sizePolicy6(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy6.setHorizontalStretch(1);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(bitLineEdit->sizePolicy().hasHeightForWidth());
+        bitLineEdit->setSizePolicy(sizePolicy6);
+        bitLineEdit->setFont(font);
 
-        horizontalLayout_4->addWidget(bitLineEdit0);
-
-        bitLineEdit1 = new QLineEdit(groupBox_2);
-        bitLineEdit1->setObjectName(QString::fromUtf8("bitLineEdit1"));
-
-        horizontalLayout_4->addWidget(bitLineEdit1);
-
-        bitLineEdit2 = new QLineEdit(groupBox_2);
-        bitLineEdit2->setObjectName(QString::fromUtf8("bitLineEdit2"));
-        sizePolicy4.setHeightForWidth(bitLineEdit2->sizePolicy().hasHeightForWidth());
-        bitLineEdit2->setSizePolicy(sizePolicy4);
-
-        horizontalLayout_4->addWidget(bitLineEdit2);
-
-        bitLineEdit3 = new QLineEdit(groupBox_2);
-        bitLineEdit3->setObjectName(QString::fromUtf8("bitLineEdit3"));
-
-        horizontalLayout_4->addWidget(bitLineEdit3);
+        horizontalLayout_4->addWidget(bitLineEdit);
 
 
         verticalLayout_2->addLayout(horizontalLayout_4);
@@ -348,112 +622,95 @@ public:
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_3);
+
         copyBitPushButton = new QPushButton(groupBox_2);
         copyBitPushButton->setObjectName(QString::fromUtf8("copyBitPushButton"));
-        QSizePolicy sizePolicy5(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy5.setHorizontalStretch(200);
-        sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(copyBitPushButton->sizePolicy().hasHeightForWidth());
-        copyBitPushButton->setSizePolicy(sizePolicy5);
+        QSizePolicy sizePolicy7(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy7.setHorizontalStretch(200);
+        sizePolicy7.setVerticalStretch(0);
+        sizePolicy7.setHeightForWidth(copyBitPushButton->sizePolicy().hasHeightForWidth());
+        copyBitPushButton->setSizePolicy(sizePolicy7);
         copyBitPushButton->setMinimumSize(QSize(100, 0));
+        copyBitPushButton->setFont(font);
 
         horizontalLayout->addWidget(copyBitPushButton);
 
         pasteBitPushButton = new QPushButton(groupBox_2);
         pasteBitPushButton->setObjectName(QString::fromUtf8("pasteBitPushButton"));
-        QSizePolicy sizePolicy6(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy6.setHorizontalStretch(0);
-        sizePolicy6.setVerticalStretch(0);
-        sizePolicy6.setHeightForWidth(pasteBitPushButton->sizePolicy().hasHeightForWidth());
-        pasteBitPushButton->setSizePolicy(sizePolicy6);
+        sizePolicy5.setHeightForWidth(pasteBitPushButton->sizePolicy().hasHeightForWidth());
+        pasteBitPushButton->setSizePolicy(sizePolicy5);
         pasteBitPushButton->setMinimumSize(QSize(100, 0));
+        pasteBitPushButton->setFont(font);
 
         horizontalLayout->addWidget(pasteBitPushButton);
 
-        genFromDestination = new QPushButton(groupBox_2);
-        genFromDestination->setObjectName(QString::fromUtf8("genFromDestination"));
-        sizePolicy6.setHeightForWidth(genFromDestination->sizePolicy().hasHeightForWidth());
-        genFromDestination->setSizePolicy(sizePolicy6);
-        genFromDestination->setMinimumSize(QSize(100, 0));
+        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        horizontalLayout->addWidget(genFromDestination);
-
-        horizontalSpacer_12 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer_12);
+        horizontalLayout->addItem(horizontalSpacer_5);
 
 
         verticalLayout_2->addLayout(horizontalLayout);
 
 
-        verticalLayout_4->addLayout(verticalLayout_2);
+        verticalLayout_3->addLayout(verticalLayout_2);
 
-        gridLayout_10 = new QGridLayout();
-        gridLayout_10->setSpacing(6);
-        gridLayout_10->setObjectName(QString::fromUtf8("gridLayout_10"));
-        horizontalLayout_9 = new QHBoxLayout();
-        horizontalLayout_9->setSpacing(6);
-        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
-        label_6 = new QLabel(groupBox_2);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
-
-        horizontalLayout_9->addWidget(label_6);
-
-        yawComboBox = new QComboBox(groupBox_2);
-        yawComboBox->addItem(QString());
-        yawComboBox->addItem(QString());
-        yawComboBox->addItem(QString());
-        yawComboBox->addItem(QString());
-        yawComboBox->setObjectName(QString::fromUtf8("yawComboBox"));
-
-        horizontalLayout_9->addWidget(yawComboBox);
-
-        horizontalSpacer_9 = new QSpacerItem(40, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
-
-        horizontalLayout_9->addItem(horizontalSpacer_9);
-
-        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
-
-        horizontalLayout_9->addItem(horizontalSpacer_5);
-
-
-        gridLayout_10->addLayout(horizontalLayout_9, 0, 1, 1, 1);
-
+        gridLayout_3 = new QGridLayout();
+        gridLayout_3->setSpacing(6);
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         horizontalLayout_8 = new QHBoxLayout();
         horizontalLayout_8->setSpacing(6);
         horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
         amoutLabel1 = new QLabel(groupBox_2);
         amoutLabel1->setObjectName(QString::fromUtf8("amoutLabel1"));
+        amoutLabel1->setFont(font);
 
         horizontalLayout_8->addWidget(amoutLabel1);
 
         amoutSpinBox1 = new QSpinBox(groupBox_2);
         amoutSpinBox1->setObjectName(QString::fromUtf8("amoutSpinBox1"));
-        QSizePolicy sizePolicy7(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy7.setHorizontalStretch(0);
-        sizePolicy7.setVerticalStretch(0);
-        sizePolicy7.setHeightForWidth(amoutSpinBox1->sizePolicy().hasHeightForWidth());
-        amoutSpinBox1->setSizePolicy(sizePolicy7);
-        amoutSpinBox1->setMaximum(20);
+        QSizePolicy sizePolicy8(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy8.setHorizontalStretch(0);
+        sizePolicy8.setVerticalStretch(0);
+        sizePolicy8.setHeightForWidth(amoutSpinBox1->sizePolicy().hasHeightForWidth());
+        amoutSpinBox1->setSizePolicy(sizePolicy8);
+        amoutSpinBox1->setFont(font);
+        amoutSpinBox1->setMaximum(1820);
 
         horizontalLayout_8->addWidget(amoutSpinBox1);
 
-        horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
 
-        horizontalLayout_8->addItem(horizontalSpacer_8);
+        gridLayout_3->addLayout(horizontalLayout_8, 1, 0, 1, 1);
 
-        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setSpacing(6);
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        amoutLabel2 = new QLabel(groupBox_2);
+        amoutLabel2->setObjectName(QString::fromUtf8("amoutLabel2"));
+        amoutLabel2->setFont(font);
 
-        horizontalLayout_8->addItem(horizontalSpacer_4);
+        horizontalLayout_7->addWidget(amoutLabel2);
+
+        amoutSpinBox2 = new QSpinBox(groupBox_2);
+        amoutSpinBox2->setObjectName(QString::fromUtf8("amoutSpinBox2"));
+        sizePolicy8.setHeightForWidth(amoutSpinBox2->sizePolicy().hasHeightForWidth());
+        amoutSpinBox2->setSizePolicy(sizePolicy8);
+        amoutSpinBox2->setFont(font);
+        amoutSpinBox2->setMaximum(1820);
+
+        horizontalLayout_7->addWidget(amoutSpinBox2);
 
 
-        gridLayout_10->addLayout(horizontalLayout_8, 1, 0, 1, 1);
+        gridLayout_3->addLayout(horizontalLayout_7, 1, 1, 1, 1);
 
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setSpacing(6);
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         label_3 = new QLabel(groupBox_2);
         label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setFont(font);
 
         horizontalLayout_6->addWidget(label_3);
 
@@ -461,187 +718,78 @@ public:
         pitchComboBox->addItem(QString());
         pitchComboBox->addItem(QString());
         pitchComboBox->setObjectName(QString::fromUtf8("pitchComboBox"));
+        pitchComboBox->setFont(font);
 
         horizontalLayout_6->addWidget(pitchComboBox);
 
-        horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
 
-        horizontalLayout_6->addItem(horizontalSpacer_7);
-
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
-
-        horizontalLayout_6->addItem(horizontalSpacer_3);
-
-
-        gridLayout_10->addLayout(horizontalLayout_6, 0, 0, 1, 1);
-
-        horizontalLayout_7 = new QHBoxLayout();
-        horizontalLayout_7->setSpacing(6);
-        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        amoutLabel2 = new QLabel(groupBox_2);
-        amoutLabel2->setObjectName(QString::fromUtf8("amoutLabel2"));
-
-        horizontalLayout_7->addWidget(amoutLabel2);
-
-        amoutSpinBox2 = new QSpinBox(groupBox_2);
-        amoutSpinBox2->setObjectName(QString::fromUtf8("amoutSpinBox2"));
-        sizePolicy7.setHeightForWidth(amoutSpinBox2->sizePolicy().hasHeightForWidth());
-        amoutSpinBox2->setSizePolicy(sizePolicy7);
-        amoutSpinBox2->setMaximum(20);
-
-        horizontalLayout_7->addWidget(amoutSpinBox2);
-
-        horizontalSpacer_10 = new QSpacerItem(40, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
-
-        horizontalLayout_7->addItem(horizontalSpacer_10);
-
-        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Maximum, QSizePolicy::Minimum);
-
-        horizontalLayout_7->addItem(horizontalSpacer_6);
-
-
-        gridLayout_10->addLayout(horizontalLayout_7, 1, 1, 1, 1);
-
-        calcFTLPushButton = new QPushButton(groupBox_2);
-        calcFTLPushButton->setObjectName(QString::fromUtf8("calcFTLPushButton"));
-        QSizePolicy sizePolicy8(QSizePolicy::Preferred, QSizePolicy::Maximum);
-        sizePolicy8.setHorizontalStretch(0);
-        sizePolicy8.setVerticalStretch(0);
-        sizePolicy8.setHeightForWidth(calcFTLPushButton->sizePolicy().hasHeightForWidth());
-        calcFTLPushButton->setSizePolicy(sizePolicy8);
-
-        gridLayout_10->addWidget(calcFTLPushButton, 1, 3, 1, 1);
+        gridLayout_3->addLayout(horizontalLayout_6, 0, 0, 1, 1);
 
         isStartFromExplosionCheckBox = new QCheckBox(groupBox_2);
         isStartFromExplosionCheckBox->setObjectName(QString::fromUtf8("isStartFromExplosionCheckBox"));
+        isStartFromExplosionCheckBox->setFont(font);
 
-        gridLayout_10->addWidget(isStartFromExplosionCheckBox, 0, 3, 1, 1);
+        gridLayout_3->addWidget(isStartFromExplosionCheckBox, 0, 2, 1, 1);
+
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setSpacing(6);
+        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
+        label_6 = new QLabel(groupBox_2);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_6->setFont(font);
+
+        horizontalLayout_9->addWidget(label_6);
+
+        directionComboBox = new QComboBox(groupBox_2);
+        directionComboBox->addItem(QString());
+        directionComboBox->addItem(QString());
+        directionComboBox->addItem(QString());
+        directionComboBox->addItem(QString());
+        directionComboBox->setObjectName(QString::fromUtf8("directionComboBox"));
+        directionComboBox->setFont(font);
+
+        horizontalLayout_9->addWidget(directionComboBox);
 
 
-        verticalLayout_4->addLayout(gridLayout_10);
+        gridLayout_3->addLayout(horizontalLayout_9, 0, 1, 1, 1);
+
+        horizontalLayout_11 = new QHBoxLayout();
+        horizontalLayout_11->setSpacing(6);
+        horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
+        displayMomentumCheckBox = new QCheckBox(groupBox_2);
+        displayMomentumCheckBox->setObjectName(QString::fromUtf8("displayMomentumCheckBox"));
+        displayMomentumCheckBox->setFont(font);
+        displayMomentumCheckBox->setChecked(true);
+        displayMomentumCheckBox->setTristate(false);
+
+        horizontalLayout_11->addWidget(displayMomentumCheckBox);
 
 
-        verticalLayout_7->addWidget(groupBox_2);
+        gridLayout_3->addLayout(horizontalLayout_11, 1, 2, 1, 1);
+
+
+        verticalLayout_3->addLayout(gridLayout_3);
+
+
+        verticalLayout_6->addWidget(groupBox_2);
+
+        traceTableWidget = new QTableWidget(tab);
+        traceTableWidget->setObjectName(QString::fromUtf8("traceTableWidget"));
+
+        verticalLayout_6->addWidget(traceTableWidget);
 
         tabWidget->addTab(tab, QString());
-        tab_3 = new QWidget();
-        tab_3->setObjectName(QString::fromUtf8("tab_3"));
-        verticalLayout_3 = new QVBoxLayout(tab_3);
-        verticalLayout_3->setSpacing(6);
-        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setSpacing(6);
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        gridLayout_3 = new QGridLayout();
-        gridLayout_3->setSpacing(6);
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        groundYLabel = new QLabel(tab_3);
-        groundYLabel->setObjectName(QString::fromUtf8("groundYLabel"));
-        groundYLabel->setFont(font);
 
-        gridLayout_3->addWidget(groundYLabel, 0, 0, 1, 1);
-
-        groundYLineEdit = new QLineEdit(tab_3);
-        groundYLineEdit->setObjectName(QString::fromUtf8("groundYLineEdit"));
-        groundYLineEdit->setFont(font);
-
-        gridLayout_3->addWidget(groundYLineEdit, 0, 1, 1, 1);
-
-        maxTickLabel = new QLabel(tab_3);
-        maxTickLabel->setObjectName(QString::fromUtf8("maxTickLabel"));
-        maxTickLabel->setFont(font);
-
-        gridLayout_3->addWidget(maxTickLabel, 1, 0, 1, 1);
-
-        maxTickLineEdit = new QLineEdit(tab_3);
-        maxTickLineEdit->setObjectName(QString::fromUtf8("maxTickLineEdit"));
-        maxTickLineEdit->setFont(font);
-
-        gridLayout_3->addWidget(maxTickLineEdit, 1, 1, 1, 1);
-
-
-        horizontalLayout_3->addLayout(gridLayout_3);
-
-        horizontalSpacer_11 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_3->addItem(horizontalSpacer_11);
-
-        genOutputPushButton = new QPushButton(tab_3);
-        genOutputPushButton->setObjectName(QString::fromUtf8("genOutputPushButton"));
-        sizePolicy8.setHeightForWidth(genOutputPushButton->sizePolicy().hasHeightForWidth());
-        genOutputPushButton->setSizePolicy(sizePolicy8);
-        genOutputPushButton->setFont(font);
-
-        horizontalLayout_3->addWidget(genOutputPushButton);
-
-
-        verticalLayout_3->addLayout(horizontalLayout_3);
-
-        outputTableView = new QTableView(tab_3);
-        outputTableView->setObjectName(QString::fromUtf8("outputTableView"));
-        QFont font1;
-        font1.setPointSize(11);
-        outputTableView->setFont(font1);
-        outputTableView->setContextMenuPolicy(Qt::CustomContextMenu);
-        outputTableView->setShowGrid(true);
-        outputTableView->horizontalHeader()->setCascadingSectionResizes(false);
-        outputTableView->horizontalHeader()->setMinimumSectionSize(25);
-        outputTableView->horizontalHeader()->setDefaultSectionSize(107);
-
-        verticalLayout_3->addWidget(outputTableView);
-
-        tabWidget->addTab(tab_3, QString());
-
-        verticalLayout->addWidget(tabWidget);
-
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setSpacing(6);
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        languagePushButton = new QPushButton(centralWidget);
-        languagePushButton->setObjectName(QString::fromUtf8("languagePushButton"));
-
-        horizontalLayout_5->addWidget(languagePushButton);
-
-        horizontalSpacer_13 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_5->addItem(horizontalSpacer_13);
+        verticalLayout_7->addWidget(tabWidget);
 
         CreditLabel = new QLabel(centralWidget);
         CreditLabel->setObjectName(QString::fromUtf8("CreditLabel"));
-        CreditLabel->setFont(font);
+        CreditLabel->setFont(font1);
         CreditLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        horizontalLayout_5->addWidget(CreditLabel);
-
-
-        verticalLayout->addLayout(horizontalLayout_5);
+        verticalLayout_7->addWidget(CreditLabel);
 
         PearlCannonHelperClass->setCentralWidget(centralWidget);
-        QWidget::setTabOrder(posYLineEdit, posZLineEdit);
-        QWidget::setTabOrder(posZLineEdit, posXLineEdit);
-        QWidget::setTabOrder(posXLineEdit, motionXLineEdit);
-        QWidget::setTabOrder(motionXLineEdit, motionZLineEdit);
-        QWidget::setTabOrder(motionZLineEdit, tabWidget);
-        QWidget::setTabOrder(tabWidget, motionYLineEdit);
-        QWidget::setTabOrder(motionYLineEdit, bitLineEdit0);
-        QWidget::setTabOrder(bitLineEdit0, bitLineEdit1);
-        QWidget::setTabOrder(bitLineEdit1, bitLineEdit2);
-        QWidget::setTabOrder(bitLineEdit2, bitLineEdit3);
-        QWidget::setTabOrder(bitLineEdit3, yawComboBox);
-        QWidget::setTabOrder(yawComboBox, amoutSpinBox1);
-        QWidget::setTabOrder(amoutSpinBox1, pitchComboBox);
-        QWidget::setTabOrder(pitchComboBox, amoutSpinBox2);
-        QWidget::setTabOrder(amoutSpinBox2, calcFTLPushButton);
-        QWidget::setTabOrder(calcFTLPushButton, isStartFromExplosionCheckBox);
-        QWidget::setTabOrder(isStartFromExplosionCheckBox, groundYLineEdit);
-        QWidget::setTabOrder(groundYLineEdit, maxTickLineEdit);
-        QWidget::setTabOrder(maxTickLineEdit, genOutputPushButton);
-        QWidget::setTabOrder(genOutputPushButton, outputTableView);
-        QWidget::setTabOrder(outputTableView, copyBitPushButton);
-        QWidget::setTabOrder(copyBitPushButton, genFromDestination);
-        QWidget::setTabOrder(genFromDestination, pasteBitPushButton);
-        QWidget::setTabOrder(pasteBitPushButton, languagePushButton);
 
         retranslateUi(PearlCannonHelperClass);
 
@@ -654,48 +802,111 @@ public:
     void retranslateUi(QMainWindow *PearlCannonHelperClass)
     {
         PearlCannonHelperClass->setWindowTitle(QApplication::translate("PearlCannonHelperClass", "PearlCannonHelper", nullptr));
-        posGroupBox->setTitle(QApplication::translate("PearlCannonHelperClass", "\345\235\220\346\240\207", nullptr));
+        groupBox_3->setTitle(QApplication::translate("PearlCannonHelperClass", "360FTLH information", nullptr));
+        pearlZLineEdit->setText(QApplication::translate("PearlCannonHelperClass", "-55.9375", nullptr));
+#ifndef QT_NO_TOOLTIP
+        rotationLabel->setToolTip(QApplication::translate("PearlCannonHelperClass", "If you have rotated the machine when building it", nullptr));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_WHATSTHIS
+        rotationLabel->setWhatsThis(QString());
+#endif // QT_NO_WHATSTHIS
+        rotationLabel->setText(QApplication::translate("PearlCannonHelperClass", "Roation", nullptr));
+        pearlXLineEdit->setText(QApplication::translate("PearlCannonHelperClass", "-155.0625", nullptr));
+#ifndef QT_NO_TOOLTIP
+        pearlZLabel->setToolTip(QApplication::translate("PearlCannonHelperClass", "The z coordinate of the aligned pearl", nullptr));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_WHATSTHIS
+        pearlZLabel->setWhatsThis(QString());
+#endif // QT_NO_WHATSTHIS
+        pearlZLabel->setText(QApplication::translate("PearlCannonHelperClass", "Pearl Z", nullptr));
+        PlayerYLineEdit->setText(QApplication::translate("PearlCannonHelperClass", "64", nullptr));
+        rotationComboBox->setItemText(0, QApplication::translate("PearlCannonHelperClass", "None", nullptr));
+        rotationComboBox->setItemText(1, QApplication::translate("PearlCannonHelperClass", "CW_90", nullptr));
+        rotationComboBox->setItemText(2, QApplication::translate("PearlCannonHelperClass", "CW_180", nullptr));
+        rotationComboBox->setItemText(3, QApplication::translate("PearlCannonHelperClass", "CCW_90", nullptr));
+
+#ifndef QT_NO_TOOLTIP
+        pearlXLabel->setToolTip(QApplication::translate("PearlCannonHelperClass", "The x coordinate of the aligned pearl", nullptr));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_WHATSTHIS
+        pearlXLabel->setWhatsThis(QString());
+#endif // QT_NO_WHATSTHIS
+        pearlXLabel->setText(QApplication::translate("PearlCannonHelperClass", "Pearl X", nullptr));
+#ifndef QT_NO_TOOLTIP
+        PlayerYLabel->setToolTip(QApplication::translate("PearlCannonHelperClass", "The y value of the player entity when he's ready to throw the pearl", nullptr));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_WHATSTHIS
+        PlayerYLabel->setWhatsThis(QString());
+#endif // QT_NO_WHATSTHIS
+        PlayerYLabel->setText(QApplication::translate("PearlCannonHelperClass", "Player Y", nullptr));
+#ifndef QT_NO_TOOLTIP
+        groupBox->setToolTip(QApplication::translate("PearlCannonHelperClass", "Where you want to go", nullptr));
+#endif // QT_NO_TOOLTIP
+        groupBox->setTitle(QApplication::translate("PearlCannonHelperClass", "Destination", nullptr));
+        posZLabel_3->setText(QApplication::translate("PearlCannonHelperClass", "Z", nullptr));
+        dstXLineEdit->setText(QApplication::translate("PearlCannonHelperClass", "1000", nullptr));
+        posXLabel_3->setText(QApplication::translate("PearlCannonHelperClass", "X", nullptr));
+        dstZLineEdit->setText(QApplication::translate("PearlCannonHelperClass", "4000", nullptr));
+        groupBox_4->setTitle(QApplication::translate("PearlCannonHelperClass", "Restriction", nullptr));
+        maxUnitLabel->setText(QApplication::translate("PearlCannonHelperClass", "Maximum TNT", nullptr));
+#ifndef QT_NO_TOOLTIP
+        groundYLabel_2->setToolTip(QApplication::translate("PearlCannonHelperClass", "The ground y value. If you are above bedrock use 128", nullptr));
+#endif // QT_NO_TOOLTIP
+        groundYLabel_2->setText(QApplication::translate("PearlCannonHelperClass", "Ground Y", nullptr));
+        maxTickLineEdit_2->setText(QApplication::translate("PearlCannonHelperClass", "1000", nullptr));
+        groundYLineEdit_2->setText(QApplication::translate("PearlCannonHelperClass", "64", nullptr));
+#ifndef QT_NO_TOOLTIP
+        maxTickLabel_2->setToolTip(QApplication::translate("PearlCannonHelperClass", "Maximum simulating time", nullptr));
+#endif // QT_NO_TOOLTIP
+        maxTickLabel_2->setText(QApplication::translate("PearlCannonHelperClass", "Max tick time", nullptr));
+#ifndef QT_NO_TOOLTIP
+        applyPushButton->setToolTip(QApplication::translate("PearlCannonHelperClass", "Apply selected setting", nullptr));
+#endif // QT_NO_TOOLTIP
+        applyPushButton->setText(QApplication::translate("PearlCannonHelperClass", "Apply", nullptr));
+#ifndef QT_NO_TOOLTIP
+        genPushButton->setToolTip(QApplication::translate("PearlCannonHelperClass", "Generate recommended settings", nullptr));
+#endif // QT_NO_TOOLTIP
+        genPushButton->setText(QApplication::translate("PearlCannonHelperClass", "Generate", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("PearlCannonHelperClass", "Setting Generator", nullptr));
+        posGroupBox->setTitle(QApplication::translate("PearlCannonHelperClass", "Coordinate", nullptr));
         posYLabel->setText(QApplication::translate("PearlCannonHelperClass", "Y", nullptr));
         posYLineEdit->setText(QString());
         posXLabel->setText(QApplication::translate("PearlCannonHelperClass", "X", nullptr));
         posZLineEdit->setText(QString());
         posXLineEdit->setText(QString());
         posZLabel->setText(QApplication::translate("PearlCannonHelperClass", "Z", nullptr));
-        motionGroupBox->setTitle(QApplication::translate("PearlCannonHelperClass", "\351\200\237\345\272\246", nullptr));
+        motionGroupBox->setTitle(QApplication::translate("PearlCannonHelperClass", "Momentum", nullptr));
         motionXLineEdit->setText(QString());
         motionXLabel->setText(QApplication::translate("PearlCannonHelperClass", "X", nullptr));
         motionYLabel->setText(QApplication::translate("PearlCannonHelperClass", "Y", nullptr));
         motionZLineEdit->setText(QString());
         motionYLineEdit->setText(QString());
         motionZLabel->setText(QApplication::translate("PearlCannonHelperClass", "Z", nullptr));
-        groupBox_2->setTitle(QApplication::translate("PearlCannonHelperClass", "TIS\347\237\242\351\207\217\347\217\215\347\217\240\347\202\256\351\205\215\347\275\256", nullptr));
-        label_2->setText(QApplication::translate("PearlCannonHelperClass", "\344\272\214\350\277\233\345\210\266bit\345\272\217\345\210\227", nullptr));
-        copyBitPushButton->setText(QApplication::translate("PearlCannonHelperClass", "\345\244\215\345\210\266bit\345\272\217\345\210\227", nullptr));
-        pasteBitPushButton->setText(QApplication::translate("PearlCannonHelperClass", "\347\262\230\350\264\264bit\345\272\217\345\210\227", nullptr));
-        genFromDestination->setText(QApplication::translate("PearlCannonHelperClass", "\344\273\216\347\233\256\347\232\204\345\234\260\347\224\237\346\210\220", nullptr));
-        label_6->setText(QApplication::translate("PearlCannonHelperClass", "\345\207\272\345\260\204\346\260\264\345\271\263\346\226\271\345\220\221", nullptr));
-        yawComboBox->setItemText(0, QApplication::translate("PearlCannonHelperClass", "\344\270\234", nullptr));
-        yawComboBox->setItemText(1, QApplication::translate("PearlCannonHelperClass", "\345\215\227", nullptr));
-        yawComboBox->setItemText(2, QApplication::translate("PearlCannonHelperClass", "\345\214\227", nullptr));
-        yawComboBox->setItemText(3, QApplication::translate("PearlCannonHelperClass", "\350\245\277", nullptr));
-
-        amoutLabel1->setText(QApplication::translate("PearlCannonHelperClass", "\346\265\205\347\201\260\344\276\247\347\277\274\345\215\225\345\205\203\346\225\260", nullptr));
-        label_3->setText(QApplication::translate("PearlCannonHelperClass", "\345\207\272\345\260\204\344\277\257\344\273\260\346\226\271\345\220\221", nullptr));
-        pitchComboBox->setItemText(0, QApplication::translate("PearlCannonHelperClass", "\346\212\233\345\260\204", nullptr));
-        pitchComboBox->setItemText(1, QApplication::translate("PearlCannonHelperClass", "\345\271\263\345\260\204", nullptr));
-
-        amoutLabel2->setText(QApplication::translate("PearlCannonHelperClass", "\346\267\261\347\201\260\344\276\247\347\277\274\345\215\225\345\205\203\346\225\260", nullptr));
-        calcFTLPushButton->setText(QApplication::translate("PearlCannonHelperClass", "\350\256\241\347\256\227\345\210\235\347\212\266\346\200\201", nullptr));
-        isStartFromExplosionCheckBox->setText(QApplication::translate("PearlCannonHelperClass", "\344\273\216TNT\347\210\206\347\202\270\347\232\204gt\345\274\200\345\247\213\346\250\241\346\213\237\350\275\250\350\277\271", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("PearlCannonHelperClass", "\347\217\215\347\217\240\345\210\235\347\212\266\346\200\201", nullptr));
-        groundYLabel->setText(QApplication::translate("PearlCannonHelperClass", "\345\234\260\351\235\242Y\345\200\274", nullptr));
-        groundYLineEdit->setText(QApplication::translate("PearlCannonHelperClass", "128", nullptr));
-        maxTickLabel->setText(QApplication::translate("PearlCannonHelperClass", "\346\234\200\345\244\247\350\277\255\344\273\243\345\210\273\346\225\260", nullptr));
+        groupBox_5->setTitle(QApplication::translate("PearlCannonHelperClass", "Restriction", nullptr));
+        groundYLabel->setText(QApplication::translate("PearlCannonHelperClass", "Ground Y", nullptr));
+        groundYLineEdit->setText(QApplication::translate("PearlCannonHelperClass", "64", nullptr));
+        maxTickLabel->setText(QApplication::translate("PearlCannonHelperClass", "Max tick time", nullptr));
         maxTickLineEdit->setText(QApplication::translate("PearlCannonHelperClass", "1000", nullptr));
-        genOutputPushButton->setText(QApplication::translate("PearlCannonHelperClass", "\347\224\237\346\210\220\350\275\250\350\277\271", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("PearlCannonHelperClass", "\347\217\215\347\217\240\350\275\250\350\277\271\350\276\223\345\207\272", nullptr));
-        languagePushButton->setText(QApplication::translate("PearlCannonHelperClass", "\350\257\255\350\250\200\345\210\207\346\215\242", nullptr));
-        CreditLabel->setText(QApplication::translate("PearlCannonHelperClass", "v2.3 by Fallen_Breath", nullptr));
+        groupBox_2->setTitle(QApplication::translate("PearlCannonHelperClass", "360FTLH Setting", nullptr));
+        label_2->setText(QApplication::translate("PearlCannonHelperClass", "Bits", nullptr));
+        copyBitPushButton->setText(QApplication::translate("PearlCannonHelperClass", "Copy bits", nullptr));
+        pasteBitPushButton->setText(QApplication::translate("PearlCannonHelperClass", "Paste bits", nullptr));
+        amoutLabel1->setText(QApplication::translate("PearlCannonHelperClass", "Light gray", nullptr));
+        amoutLabel2->setText(QApplication::translate("PearlCannonHelperClass", "Dark gray", nullptr));
+        label_3->setText(QApplication::translate("PearlCannonHelperClass", "Pitch", nullptr));
+        pitchComboBox->setItemText(0, QApplication::translate("PearlCannonHelperClass", "0 (Horizon)", nullptr));
+        pitchComboBox->setItemText(1, QApplication::translate("PearlCannonHelperClass", "1 (Projectile)", nullptr));
+
+        isStartFromExplosionCheckBox->setText(QApplication::translate("PearlCannonHelperClass", "Starts at explosion", nullptr));
+        label_6->setText(QApplication::translate("PearlCannonHelperClass", "Direction", nullptr));
+        directionComboBox->setItemText(0, QApplication::translate("PearlCannonHelperClass", "00 (0)", nullptr));
+        directionComboBox->setItemText(1, QApplication::translate("PearlCannonHelperClass", "01 (1)", nullptr));
+        directionComboBox->setItemText(2, QApplication::translate("PearlCannonHelperClass", "10 (2)", nullptr));
+        directionComboBox->setItemText(3, QApplication::translate("PearlCannonHelperClass", "11 (3)", nullptr));
+
+        displayMomentumCheckBox->setText(QApplication::translate("PearlCannonHelperClass", "Display Momentum", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("PearlCannonHelperClass", "Trace Simulator", nullptr));
+        CreditLabel->setText(QApplication::translate("PearlCannonHelperClass", "v3.0 by Fallen_Breath", nullptr));
     } // retranslateUi
 
 };

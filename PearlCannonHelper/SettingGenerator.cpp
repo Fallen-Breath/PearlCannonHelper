@@ -13,11 +13,6 @@ SettingGenerator::SettingGenerator(QWidget *parent): QWidget(parent)
 	ui.setupUi(this);
 
 	QString expRealNumber = "^-?\\d+\\.?\\d*$";
-	ui.groundYLineEdit->setValidator(new QRegExpValidator(QRegExp(expRealNumber), this));
-	ui.srcXLineEdit->setValidator(new QRegExpValidator(QRegExp(expRealNumber), this));
-	ui.srcZLineEdit->setValidator(new QRegExpValidator(QRegExp(expRealNumber), this));
-	ui.floorYLineEdit->setValidator(new QRegExpValidator(QRegExp(expRealNumber), this));
-	ui.maxTickLineEdit->setValidator(new QRegExpValidator(QRegExp("\\d{1,9}"), this));
 
 	ui.maxUnitSpinBox->setMaximum(this->data.maxUnit);
 	ui.srcXLineEdit->setText(QString::number(this->data.srcX));
@@ -71,64 +66,6 @@ QString SettingGenerator::getBitSequence(dot d)
 	return ret;
 }
 
-void SettingGenerator::on_genPushButton_clicked()
-{
-	double dstPosX = ui.dstXLineEdit->text().toDouble();
-	double dstPosZ = ui.dstZLineEdit->text().toDouble();
-	int maxUnit = ui.maxUnitSpinBox->value();
-	int maxTick = ui.maxTickLineEdit->text().toInt();
-	int maxResult = ui.settingAmountSpinBox->value();
-	double groundY = ui.groundYLineEdit->text().toInt();
-
-	m_result.clear();
-	for (int pitch = 0; pitch < 2; pitch++)
-		for (int amount1 = 0; amount1 <= maxUnit; amount1++)
-			for (int yaw = 0; yaw < 4; yaw++)
-				for (int amount2 = 0; amount2 <= maxUnit; amount2++)
-				{
-					LiteProjectile pearl(data.getSourcePos(pitch), data.motion[pitch]);
-					pearl.accelerate(data.getThrust(pitch, amount1, yaw, amount2));
-					pearl.tick();
-					for (int tick = 0; tick < maxTick && pearl.getY() >= groundY; tick++)
-					{
-						m_result.push_back(dot(pearl.getPosition().distance(vec3d(dstPosX, pearl.getY(), dstPosZ)), pearl.getX(), pearl.getY(), pearl.getZ(), tick + 1, amount1, amount2, pitch, yaw));
-						pearl.tick();
-					}
-				}
-	sort(m_result.begin(), m_result.end());
-
-	// 输出至表格
-	QStandardItemModel *model = new QStandardItemModel;
-	ui.outputTableView->setModel(model);
-	const int ColumnCount = 10;
-	model->setColumnCount(ColumnCount);
-	for (int i = 0; i < 1; i++) ui.outputTableView->setColumnWidth(i, 137);
-	for (int i = 1; i < 5; i++) ui.outputTableView->setColumnWidth(i, 90);
-	for (int i = 5; i < ColumnCount; i++) ui.outputTableView->setColumnWidth(i, 50);
-	ui.outputTableView->verticalHeader()->setMinimumWidth(70);
-	ui.outputTableView->verticalHeader()->setDefaultAlignment(Qt::AlignCenter);
-
-	QStringList column, row;
-	column << "Sequence" << "Distance" << "PosX" << "PosY" << "PosZ" << "Tick" << "Num1" << "Num2" << "Pitch" << "Yaw";
-	model->setHorizontalHeaderLabels(column); 
-	for (int i = 0; i < min(m_result.size(), maxResult); i++)
-	{	
-		QList<QStandardItem *> list;
-		list.append(new QStandardItem(getBitSequence(m_result[i])));
-		list.append(new QStandardItem(QString::number(get<0>(m_result[i]), 'f', 4)));
-		list.append(new QStandardItem(QString::number(get<1>(m_result[i]), 'f', 4)));
-		list.append(new QStandardItem(QString::number(get<2>(m_result[i]), 'f', 4)));
-		list.append(new QStandardItem(QString::number(get<3>(m_result[i]), 'f', 4)));
-		list.append(new QStandardItem(QString::number(get<4>(m_result[i]))));
-		list.append(new QStandardItem(QString::number(get<5>(m_result[i]))));
-		list.append(new QStandardItem(QString::number(get<6>(m_result[i]))));
-		list.append(new QStandardItem(QString::number(get<7>(m_result[i]))));
-		list.append(new QStandardItem(QString::number(get<8>(m_result[i]))));
-		model->appendRow(list); 
-		for (int j = 0; j < ColumnCount; j++) model->item(i, j)->setTextAlignment(Qt::AlignCenter);
-		model->setHeaderData(i, Qt::Vertical, "Rank " + QString::number(i + 1));
-	}
-}
 
 void SettingGenerator::on_outputTableView_clicked(QModelIndex index)
 {

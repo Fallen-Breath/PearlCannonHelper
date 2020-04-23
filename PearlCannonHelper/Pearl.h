@@ -1,14 +1,14 @@
-#pragma once
+﻿#pragma once
 
 #include <vec3d.h>
 
-class LiteProjectile
+class Pearl
 {
 private:
 	vec3d position, momentum;
 
 public:
-	LiteProjectile(vec3d, vec3d);
+	Pearl(vec3d, vec3d);
 	double getX();
 	double getY();
 	double getZ();
