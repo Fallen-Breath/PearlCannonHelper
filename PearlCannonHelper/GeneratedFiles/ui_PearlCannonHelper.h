@@ -126,13 +126,16 @@ public:
     QHBoxLayout *horizontalLayout_11;
     QCheckBox *displayMomentumCheckBox;
     QTableWidget *traceTableWidget;
+    QHBoxLayout *horizontalLayout_3;
+    QComboBox *languageComboBox;
+    QSpacerItem *horizontalSpacer;
     QLabel *CreditLabel;
 
     void setupUi(QMainWindow *PearlCannonHelperClass)
     {
         if (PearlCannonHelperClass->objectName().isEmpty())
             PearlCannonHelperClass->setObjectName(QString::fromUtf8("PearlCannonHelperClass"));
-        PearlCannonHelperClass->resize(570, 797);
+        PearlCannonHelperClass->resize(561, 743);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -782,12 +785,32 @@ public:
 
         verticalLayout_7->addWidget(tabWidget);
 
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        languageComboBox = new QComboBox(centralWidget);
+        languageComboBox->addItem(QString());
+        languageComboBox->addItem(QString());
+        languageComboBox->setObjectName(QString::fromUtf8("languageComboBox"));
+        sizePolicy5.setHeightForWidth(languageComboBox->sizePolicy().hasHeightForWidth());
+        languageComboBox->setSizePolicy(sizePolicy5);
+        languageComboBox->setMinimumSize(QSize(80, 0));
+
+        horizontalLayout_3->addWidget(languageComboBox);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer);
+
         CreditLabel = new QLabel(centralWidget);
         CreditLabel->setObjectName(QString::fromUtf8("CreditLabel"));
         CreditLabel->setFont(font1);
         CreditLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        verticalLayout_7->addWidget(CreditLabel);
+        horizontalLayout_3->addWidget(CreditLabel);
+
+
+        verticalLayout_7->addLayout(horizontalLayout_3);
 
         PearlCannonHelperClass->setCentralWidget(centralWidget);
 
@@ -906,6 +929,9 @@ public:
 
         displayMomentumCheckBox->setText(QApplication::translate("PearlCannonHelperClass", "Display Momentum", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("PearlCannonHelperClass", "Trace Simulator", nullptr));
+        languageComboBox->setItemText(0, QApplication::translate("PearlCannonHelperClass", "en", nullptr));
+        languageComboBox->setItemText(1, QApplication::translate("PearlCannonHelperClass", "zh", nullptr));
+
         CreditLabel->setText(QApplication::translate("PearlCannonHelperClass", "v3.0 by Fallen_Breath", nullptr));
     } // retranslateUi
 

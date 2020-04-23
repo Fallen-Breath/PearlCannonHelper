@@ -3,4 +3,8 @@
     <file>exe_ico.ico</file>
     <file>gear.ico</file>
   </qresource>
+  <qresource prefix="language">
+    <file>pearlcannonhelper_en.qm</file>
+    <file>pearlcannonhelper_zh.qm</file>
+  </qresource>
 </RCC>

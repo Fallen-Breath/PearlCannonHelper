@@ -24,6 +24,7 @@ public slots:
 	void on_copyBitPushButton_clicked();
 	void on_pasteBitPushButton_clicked();
 	void on_genPushButton_clicked();
+	void on_languageComboBox_activated(int);
 	void on_settingTableWidget_cellClicked(int, int);
 	void on_applyPushButton_pressed();
 	void on_rotationComboBox_currentTextChanged();
@@ -39,4 +40,5 @@ private:
 	Ui::PearlCannonHelperClass ui;
 	Setting setting;
 	QVector<SortingData> result;
+	bool flag_initializing;
 };

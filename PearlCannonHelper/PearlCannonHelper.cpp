@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QClipboard>
 #include <QMessageBox>
+#include <QTranslator>
 #include <QSettings>
 #include <QDebug>
 #include <cmath>
@@ -12,7 +13,7 @@ using namespace std;
 
 PearlCannonHelper::PearlCannonHelper(QWidget *parent): QMainWindow(parent)
 {
-	setAttribute(Qt::WA_QuitOnClose, true);
+	flag_initializing = true;
 	ui.setupUi(this);
 
 	// 珍珠状态
@@ -66,6 +67,8 @@ PearlCannonHelper::PearlCannonHelper(QWidget *parent): QMainWindow(parent)
 	ui.settingTableWidget->horizontalHeader()->setStretchLastSection(true);
 
 	loadSetting();
+	on_languageComboBox_activated(ui.languageComboBox->currentIndex());
+	flag_initializing = false;
 	updateAll();
 }
 
@@ -95,7 +98,7 @@ void PearlCannonHelper::generateTrace()
 	ui.traceTableWidget->setColumnCount(ColumnCount);
 
 	QStringList column;
-	column << "Chunk" << "Position" << "Momentum";
+	column << tr("Chunk") << tr("Position") << tr("Momentum");
 	ui.traceTableWidget->setHorizontalHeaderLabels(column);
 	for (int i = 0; i < maxTick && pearl.getY() >= groundY; i++)
 	{
@@ -126,6 +129,7 @@ void PearlCannonHelper::loadSetting()
 	ui.maxTNTSpinBox->setValue(settings.value("maxTNT", ui.maxTNTSpinBox->value()).toInt());
 	ui.groundYLineEdit->setText(settings.value("groundY", ui.groundYLineEdit->text()).toString());
 	ui.maxTickLineEdit->setText(settings.value("maxTickTime", ui.maxTickLineEdit->text()).toString());
+	ui.languageComboBox->setCurrentIndex(settings.value("Language", ui.languageComboBox->currentIndex()).toInt());
 }
 
 void PearlCannonHelper::saveSetting()
@@ -138,10 +142,13 @@ void PearlCannonHelper::saveSetting()
 	settings.setValue("maxTNT", ui.maxTNTSpinBox->value());
 	settings.setValue("groundY", ui.groundYLineEdit->text());
 	settings.setValue("maxTickTime", ui.maxTickLineEdit->text());
+	settings.setValue("Language", ui.languageComboBox->currentIndex());
+	qDebug() << ui.languageComboBox->currentIndex();
 }
 
 void PearlCannonHelper::updatePearlInfo()
 {
+	if (flag_initializing) return;
 	Pearl pearl = getPearl();
 	pearl.accelerate(setting.getThrust());
 
@@ -157,11 +164,12 @@ void PearlCannonHelper::updatePearlInfo()
 	ui.motionYLineEdit->setText(QString::number(pearl.getMy(), 'f'));
 	ui.motionZLineEdit->setText(QString::number(pearl.getMz(), 'f'));
 
-	ui.bitLineEdit->setText(setting.toString());
-	ui.pitchComboBox->setCurrentIndex(setting.pitch);
-	ui.directionComboBox->setCurrentIndex(setting.direction);
-	ui.amoutSpinBox1->setValue(setting.amount_l);
-	ui.amoutSpinBox2->setValue(setting.amount_r);
+	Setting t_setting = setting;
+	ui.bitLineEdit->setText(t_setting.toString());
+	ui.pitchComboBox->setCurrentIndex(t_setting.pitch);
+	ui.directionComboBox->setCurrentIndex(t_setting.direction);
+	ui.amoutSpinBox1->setValue(t_setting.amount_l);
+	ui.amoutSpinBox2->setValue(t_setting.amount_r);
 
 	generateTrace();
 	saveSetting();
@@ -169,6 +177,7 @@ void PearlCannonHelper::updatePearlInfo()
 
 void PearlCannonHelper::updateSetting()
 {
+	if (flag_initializing) return;
 	setting.amount_l = ui.amoutSpinBox1->value();
 	setting.amount_r = ui.amoutSpinBox2->value();
 	setting.direction = ui.directionComboBox->currentIndex();
@@ -178,6 +187,7 @@ void PearlCannonHelper::updateSetting()
 
 void PearlCannonHelper::updateAll()
 {
+	if (flag_initializing) return;
 	on_genPushButton_clicked();
 	updatePearlInfo();
 }
@@ -273,7 +283,7 @@ void PearlCannonHelper::on_genPushButton_clicked()
 
 	// 输出至表格
 	QStringList column;
-	column << "Distance" << "Position" << "Tick" << "Num1" << "Num2" << "Total TNT";
+	column << tr("Distance") << tr("Position") << tr("Tick") << tr("Light") << tr("Dark") << tr("Total TNT");
 	int ColumnCount = column.length();
 	ui.settingTableWidget->setRowCount(0);
 	ui.settingTableWidget->setColumnCount(ColumnCount);
@@ -289,6 +299,21 @@ void PearlCannonHelper::on_genPushButton_clicked()
 		ui.settingTableWidget->setItem(i, 5, new QTableWidgetItem(QString::number(result[i].setting.amount_l + result[i].setting.amount_r)));
 		for (int j = 0; j < ColumnCount; j++) ui.settingTableWidget->item(i, j)->setTextAlignment(Qt::AlignCenter);
 	}
+}
+
+void PearlCannonHelper::on_languageComboBox_activated(int index)
+{
+	QMap<int, QString> map;
+	map[0] = "en";
+	map[1] = "zh";
+	static QTranslator m;
+	m.load(QString(":/language/pearlcannonhelper_%1.qm").arg(map[index]));
+	qDebug() << "Language changing to " << map[index];
+	qApp->installTranslator(&m);
+	saveSetting();
+	ui.retranslateUi(this);
+	loadSetting();
+	updateAll();
 }
 
 void PearlCannonHelper::on_settingTableWidget_cellClicked(int row, int column)
