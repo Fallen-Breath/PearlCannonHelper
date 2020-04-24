@@ -229,14 +229,25 @@ void PearlCannonHelper::on_pasteBitPushButton_clicked()
 	tryLoadBitSeq(text);
 }
 
+bool intersect(double a1, double a2, double b1, double b2)
+{
+	return max(a1, b1) < min(a2, b2);
+}
+
 bool inRange(int direction, double angle, double delta)
 {
 	const double pi = acos(-1);
 	double a1 = Setting(0, 1, direction, 0).getThrust().angle();
 	double a2 = Setting(1, 0, direction, 0).getThrust().angle();
 	if (a2 < a1) swap(a1, a2);
-	if (abs(a2 - a1) > pi) a1 += 2 * pi;
-	return max(a1, angle - delta) < min(a2, angle + delta);
+	if (abs(a2 - a1) > pi)
+	{
+		a1 += 2 * pi;
+		swap(a1, a2);
+	}
+	double b1 = angle - delta;
+	double b2 = angle + delta;
+	return intersect(a1, a2, b1, b2) || intersect(a1 + 2 * pi, a2 + 2 * pi, b1, b2) || intersect(a1, a2, b1 + 2 * pi, b2 + 2 * pi);
 }
 
 void PearlCannonHelper::updateResult()
@@ -296,6 +307,7 @@ void PearlCannonHelper::on_genPushButton_clicked()
 	for (int d = 0; d < 4; d++)
 		if (inRange(d, angle, delta))
 		{
+			qDebug() << "Searching in direction " << d;
 			for (int i = 0; i <= maxTNT; i++)
 			{
 				bool flag_success = false, flag_break = false;
