@@ -76,6 +76,8 @@ PearlCannonHelper::PearlCannonHelper(QWidget *parent): QMainWindow(parent)
 	connect(ui.PlayerYLineEdit, SIGNAL(textEdited(QString)), this, SLOT(updatePearlInfo()));
 	connect(ui.bitLineEdit, SIGNAL(textEdited(QString)), this, SLOT(tryLoadBitSeq(QString)));
 
+	connect(ui.settingTableWidget->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(sortSettingTable(int)));
+
 
 	flag_initializing = false;
 	updateAll();
@@ -227,11 +229,6 @@ void PearlCannonHelper::on_pasteBitPushButton_clicked()
 	tryLoadBitSeq(text);
 }
 
-bool cmp(const SortingData &a, const SortingData &b)
-{
-	return a.dis < b.dis;
-}
-
 bool inRange(int direction, double angle, double delta)
 {
 	const double pi = acos(-1);
@@ -242,6 +239,47 @@ bool inRange(int direction, double angle, double delta)
 	return max(a1, angle - delta) < min(a2, angle + delta);
 }
 
+void PearlCannonHelper::updateResult()
+{
+	QStringList column;
+	column << tr("Distance") << tr("Position") << tr("Tick") << tr("Light") << tr("Dark") << tr("Total TNT");
+	int ColumnCount = column.length();
+	ui.settingTableWidget->setRowCount(0);
+	ui.settingTableWidget->setColumnCount(ColumnCount);
+	ui.settingTableWidget->setHorizontalHeaderLabels(column);
+	for (int i = 0; i < result.size(); i++)
+	{
+		ui.settingTableWidget->insertRow(ui.settingTableWidget->rowCount());
+		ui.settingTableWidget->setItem(i, 0, new QTableWidgetItem(QString::number(result[i].dis, 'f', 4)));
+		ui.settingTableWidget->setItem(i, 1, new QTableWidgetItem(result[i].pos.toString()));
+		ui.settingTableWidget->setItem(i, 2, new QTableWidgetItem(QString::number(result[i].tick)));
+		ui.settingTableWidget->setItem(i, 3, new QTableWidgetItem(QString::number(result[i].setting.amount_l)));
+		ui.settingTableWidget->setItem(i, 4, new QTableWidgetItem(QString::number(result[i].setting.amount_r)));
+		ui.settingTableWidget->setItem(i, 5, new QTableWidgetItem(QString::number(result[i].setting.amount_l + result[i].setting.amount_r)));
+		for (int j = 0; j < ColumnCount; j++) ui.settingTableWidget->item(i, j)->setTextAlignment(Qt::AlignCenter);
+	}
+}
+
+bool cmpDistance(const SortingData &a, const SortingData &b)
+{
+	return a.dis < b.dis;
+}
+bool cmpTick(const SortingData &a, const SortingData &b)
+{
+	return a.tick < b.tick;
+}
+bool cmpLightGray(const SortingData &a, const SortingData &b)
+{
+	return a.setting.amount_l < b.setting.amount_l;
+}
+bool cmpDarkGray(const SortingData &a, const SortingData &b)
+{
+	return a.setting.amount_r < b.setting.amount_r;
+}
+bool cmpTNT(const SortingData &a, const SortingData &b)
+{
+	return a.setting.amount_l + a.setting.amount_r < b.setting.amount_l + b.setting.amount_r;
+}
 void PearlCannonHelper::on_genPushButton_clicked()
 {
 	double dstPosX = ui.dstXLineEdit->text().toDouble();
@@ -252,28 +290,26 @@ void PearlCannonHelper::on_genPushButton_clicked()
 
 	Pearl pearl0 = getPearl();
 	double angle = (vec3d(dstPosX, pearl0.getY(), dstPosZ) - pearl0.getPosition()).angle();
-	double delta = 0.1 / maxTNT;
-	result.clear();
+	double delta = 1.0 / maxTNT;
+	QVector<SortingData> srt;
 	int cnt = 0;
 	for (int d = 0; d < 4; d++)
 		if (inRange(d, angle, delta))
 		{
-			int l = 0;
 			for (int i = 0; i <= maxTNT; i++)
 			{
 				bool flag_success = false, flag_break = false;
-				for (int j = l; !flag_break && j <= maxTNT; j++)
+				for (int j = 0; !flag_break && j <= maxTNT; j++)
 					for (int p = 0; !flag_break && p < 2; p++)
 					{
-						cnt++;
 						Setting s = Setting(i, j, d, p);
+						cnt++;
 						double a = s.getThrust().angle();
 						if (!(abs(angle - a) < delta))
 						{
 							if (flag_success) flag_break = true;
 							continue;
 						}
-						if (!flag_success) l = j;
 						flag_success = true;
 						Pearl pearl = pearl0;
 						pearl.accelerate(s.getThrust());
@@ -291,31 +327,52 @@ void PearlCannonHelper::on_genPushButton_clicked()
 								best = SortingData{mn, pearl.getPosition(), tick + 1, s};
 							}
 						}
-						if (mn != 1e10) result.push_back(best);
+						if (mn != 1e10) srt.push_back(best);
 					}
 			}
 		}
-	sort(result.begin(), result.end(), cmp);
-	qDebug() << result.size() << ' ' << cnt;
+	qDebug() << srt.size() << ' ' << cnt;
 
-	// 输出至表格
-	QStringList column;
-	column << tr("Distance") << tr("Position") << tr("Tick") << tr("Light") << tr("Dark") << tr("Total TNT");
-	int ColumnCount = column.length();
-	ui.settingTableWidget->setRowCount(0);
-	ui.settingTableWidget->setColumnCount(ColumnCount);
-	ui.settingTableWidget->setHorizontalHeaderLabels(column);
-	for (int i = 0; i < min(result.size(), 100); i++)
+	sort(srt.begin(), srt.end(), cmpDistance);
+	result.clear();
+	for (int i = 0; i < min(srt.size(), 100); i++) result.push_back(srt[i]);
+	updateResult();
+	lastClickedSettingColumn = 0;
+}
+void PearlCannonHelper::sortSettingTable(int column)
+{
+	switch (column)
 	{
-		ui.settingTableWidget->insertRow(ui.settingTableWidget->rowCount());
-		ui.settingTableWidget->setItem(i, 0, new QTableWidgetItem(QString::number(result[i].dis, 'f', 4)));
-		ui.settingTableWidget->setItem(i, 1, new QTableWidgetItem(result[i].pos.toString()));
-		ui.settingTableWidget->setItem(i, 2, new QTableWidgetItem(QString::number(result[i].tick)));
-		ui.settingTableWidget->setItem(i, 3, new QTableWidgetItem(QString::number(result[i].setting.amount_l)));
-		ui.settingTableWidget->setItem(i, 4, new QTableWidgetItem(QString::number(result[i].setting.amount_r)));
-		ui.settingTableWidget->setItem(i, 5, new QTableWidgetItem(QString::number(result[i].setting.amount_l + result[i].setting.amount_r)));
-		for (int j = 0; j < ColumnCount; j++) ui.settingTableWidget->item(i, j)->setTextAlignment(Qt::AlignCenter);
+	case 0:
+	case 1:
+		sort(result.begin(), result.end(), cmpDistance);
+		break;
+	case 2:
+		sort(result.begin(), result.end(), cmpTick);
+		break;
+	case 3:
+		sort(result.begin(), result.end(), cmpLightGray);
+		break;
+	case 4:
+		sort(result.begin(), result.end(), cmpDarkGray);
+		break;
+	case 5:
+		sort(result.begin(), result.end(), cmpTNT);
+		break;
+	default:
+		break;
 	}
+	if (column == lastClickedSettingColumn)
+	{
+		lastClickedSettingColumn = -1;
+		for (int i = 0; i < result.size() / 2; i++)
+			swap(result[i], result[result.size() - i - 1]);
+	}
+	else
+	{
+		lastClickedSettingColumn = column;
+	}
+	updateResult();
 }
 
 void PearlCannonHelper::on_languageComboBox_activated(int index)
@@ -332,7 +389,6 @@ void PearlCannonHelper::on_languageComboBox_activated(int index)
 	loadSetting();
 	updateAll();
 }
-
 void PearlCannonHelper::on_settingTableWidget_cellClicked(int row, int column)
 {
 	if (row == -1) return;

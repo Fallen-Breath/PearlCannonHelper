@@ -932,7 +932,7 @@ public:
         languageComboBox->setItemText(0, QApplication::translate("PearlCannonHelperClass", "en", nullptr));
         languageComboBox->setItemText(1, QApplication::translate("PearlCannonHelperClass", "zh", nullptr));
 
-        CreditLabel->setText(QApplication::translate("PearlCannonHelperClass", "v3.2 by Fallen_Breath", nullptr));
+        CreditLabel->setText(QApplication::translate("PearlCannonHelperClass", "v3.3 by Fallen_Breath", nullptr));
     } // retranslateUi
 
 };

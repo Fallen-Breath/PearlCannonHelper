@@ -33,13 +33,16 @@ public slots:
 	void updatePearlInfo();
 	void updateAll();
 	void tryLoadBitSeq(QString);
+	void sortSettingTable(int);
 
 private:
 	Pearl getPearl();
 	void loadSetting();
 	void saveSetting();
+	void updateResult();
 	Ui::PearlCannonHelperClass ui;
 	Setting setting;
 	QVector<SortingData> result;
 	bool flag_initializing;
+	int lastClickedSettingColumn;
 };
