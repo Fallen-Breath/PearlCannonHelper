@@ -1307,7 +1307,7 @@
          </font>
         </property>
         <property name="text">
-         <string>v3.1 by Fallen_Breath</string>
+         <string>v3.2 by Fallen_Breath</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

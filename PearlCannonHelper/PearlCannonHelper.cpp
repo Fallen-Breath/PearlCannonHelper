@@ -40,10 +40,22 @@ PearlCannonHelper::PearlCannonHelper(QWidget *parent): QMainWindow(parent)
 	ui.groundYLineEdit_2->setValidator(new QRegExpValidator(QRegExp(StringHelper::expRealNumber), this));
 	ui.maxTickLineEdit_2->setValidator(new QRegExpValidator(QRegExp(StringHelper::expIntNumber), this));
 
+	ui.tabWidget->setTabPosition(QTabWidget::South);
+	ui.traceTableWidget->verticalHeader()->setDefaultAlignment(Qt::AlignCenter);
+	ui.traceTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+	ui.traceTableWidget->horizontalHeader()->setStretchLastSection(true);
+	ui.settingTableWidget->verticalHeader()->setDefaultAlignment(Qt::AlignCenter);
+	ui.settingTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+	ui.settingTableWidget->horizontalHeader()->setStretchLastSection(true);
+
+	loadSetting();
+	on_languageComboBox_activated(ui.languageComboBox->currentIndex());
+
 	connect(ui.groundYLineEdit, SIGNAL(textEdited(QString)), ui.groundYLineEdit_2, SLOT(setText(QString)));
 	connect(ui.groundYLineEdit_2, SIGNAL(textEdited(QString)), ui.groundYLineEdit, SLOT(setText(QString)));
+	connect(ui.groundYLineEdit, SIGNAL(textChanged(QString)), this, SLOT(updatePearlInfo()));
 	connect(ui.maxTickLineEdit, SIGNAL(textEdited(QString)), ui.maxTickLineEdit_2, SLOT(setText(QString)));
-	connect(ui.maxTickLineEdit_2, SIGNAL(textEdited(QString)), ui.maxTickLineEdit, SLOT(setText(QString)));	
+	connect(ui.maxTickLineEdit_2, SIGNAL(textEdited(QString)), ui.maxTickLineEdit, SLOT(setText(QString)));
 
 	connect(ui.displayMomentumCheckBox, SIGNAL(stateChanged(int)), this, SLOT(generateTrace()));
 	connect(ui.posXLineEdit, SIGNAL(textEdited(QString)), this, SLOT(generateTrace()));
@@ -65,16 +77,6 @@ PearlCannonHelper::PearlCannonHelper(QWidget *parent): QMainWindow(parent)
 	connect(ui.bitLineEdit, SIGNAL(textEdited(QString)), this, SLOT(tryLoadBitSeq(QString)));
 
 
-	ui.tabWidget->setTabPosition(QTabWidget::South);
-	ui.traceTableWidget->verticalHeader()->setDefaultAlignment(Qt::AlignCenter);
-	ui.traceTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-	ui.traceTableWidget->horizontalHeader()->setStretchLastSection(true);
-	ui.settingTableWidget->verticalHeader()->setDefaultAlignment(Qt::AlignCenter);
-	ui.settingTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-	ui.settingTableWidget->horizontalHeader()->setStretchLastSection(true);
-
-	loadSetting();
-	on_languageComboBox_activated(ui.languageComboBox->currentIndex());
 	flag_initializing = false;
 	updateAll();
 }
@@ -89,6 +91,7 @@ QString getChunkString(vec3d pos)
 // in 1gt: [logger -> explode -> move -> drag -> gravity]
 void PearlCannonHelper::generateTrace()
 {
+	if (flag_initializing) return;
 	double _x = ui.posXLineEdit->text().toDouble();
 	double _y = ui.posYLineEdit->text().toDouble();
 	double _z = ui.posZLineEdit->text().toDouble();
@@ -134,7 +137,9 @@ void PearlCannonHelper::loadSetting()
 	ui.PlayerYLineEdit->setText(settings.value("playerY", ui.PlayerYLineEdit->text()).toString());
 	ui.rotationComboBox->setCurrentIndex(settings.value("rotation", ui.rotationComboBox->currentIndex()).toInt());
 	ui.maxTNTSpinBox->setValue(settings.value("maxTNT", ui.maxTNTSpinBox->value()).toInt());
-	ui.groundYLineEdit->setText(settings.value("groundY", ui.groundYLineEdit->text()).toString());
+	QString groundY = settings.value("groundY", ui.groundYLineEdit->text()).toString();
+	ui.groundYLineEdit->setText(groundY);
+	ui.groundYLineEdit_2->setText(groundY);
 	ui.maxTickLineEdit->setText(settings.value("maxTickTime", ui.maxTickLineEdit->text()).toString());
 	ui.languageComboBox->setCurrentIndex(settings.value("Language", ui.languageComboBox->currentIndex()).toInt());
 }
