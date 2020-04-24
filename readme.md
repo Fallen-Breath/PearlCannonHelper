@@ -1,5 +1,13 @@
-一个输出珍珠轨迹的助手
+PearlCannonHelper
+-------------
 
-通过输入某一时刻珍珠的状态，可以模拟出珍珠之后的运动轨迹
+A tool to simulate pearl's trace and generate setting from specific coordinate for [360FTL Heavy](https://youtu.be/1_MLMXVpHbU)
 
-也当是练习下qt了
+Works on Windows
+
+-----------------
+
+一个用于模拟珍珠轨迹或者由指定坐标生成[重型矢量珍珠炮](https://www.bilibili.com/video/BV1NC4y1x7WW)配置的工具
+
+在Windows上运行
+

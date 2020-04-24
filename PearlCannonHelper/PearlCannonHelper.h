@@ -32,6 +32,7 @@ public slots:
 	void updateSetting();
 	void updatePearlInfo();
 	void updateAll();
+	void tryLoadBitSeq(QString);
 
 private:
 	Pearl getPearl();

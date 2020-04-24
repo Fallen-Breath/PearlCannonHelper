@@ -46,6 +46,12 @@ PearlCannonHelper::PearlCannonHelper(QWidget *parent): QMainWindow(parent)
 	connect(ui.maxTickLineEdit_2, SIGNAL(textEdited(QString)), ui.maxTickLineEdit, SLOT(setText(QString)));	
 
 	connect(ui.displayMomentumCheckBox, SIGNAL(stateChanged(int)), this, SLOT(generateTrace()));
+	connect(ui.posXLineEdit, SIGNAL(textEdited(QString)), this, SLOT(generateTrace()));
+	connect(ui.posYLineEdit, SIGNAL(textEdited(QString)), this, SLOT(generateTrace()));
+	connect(ui.posZLineEdit, SIGNAL(textEdited(QString)), this, SLOT(generateTrace()));
+	connect(ui.motionXLineEdit, SIGNAL(textEdited(QString)), this, SLOT(generateTrace()));
+	connect(ui.motionYLineEdit, SIGNAL(textEdited(QString)), this, SLOT(generateTrace()));
+	connect(ui.motionZLineEdit, SIGNAL(textEdited(QString)), this, SLOT(generateTrace()));
 
 	connect(ui.isStartFromExplosionCheckBox, SIGNAL(stateChanged(int)), this, SLOT(updatePearlInfo()));
 	connect(ui.pitchComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateSetting()));
@@ -56,6 +62,7 @@ PearlCannonHelper::PearlCannonHelper(QWidget *parent): QMainWindow(parent)
 	connect(ui.pearlXLineEdit, SIGNAL(textEdited(QString)), this, SLOT(updatePearlInfo()));
 	connect(ui.pearlZLineEdit, SIGNAL(textEdited(QString)), this, SLOT(updatePearlInfo()));
 	connect(ui.PlayerYLineEdit, SIGNAL(textEdited(QString)), this, SLOT(updatePearlInfo()));
+	connect(ui.bitLineEdit, SIGNAL(textEdited(QString)), this, SLOT(tryLoadBitSeq(QString)));
 
 
 	ui.tabWidget->setTabPosition(QTabWidget::South);
@@ -192,6 +199,19 @@ void PearlCannonHelper::updateAll()
 	updatePearlInfo();
 }
 
+void PearlCannonHelper::tryLoadBitSeq(QString text)
+{
+	try
+	{
+		setting = Setting(text);
+		updatePearlInfo();
+	}
+	catch (...)
+	{
+		return;
+	}
+}
+
 void PearlCannonHelper::on_copyBitPushButton_clicked()
 {
 	QApplication::clipboard()->setText(setting.toString());
@@ -199,15 +219,7 @@ void PearlCannonHelper::on_copyBitPushButton_clicked()
 void PearlCannonHelper::on_pasteBitPushButton_clicked()
 {
 	QString text = QApplication::clipboard()->text();
-	try
-	{
-		setting = Setting(text);
-		updateAll();
-	}
-	catch (...)
-	{
-		return;
-	}
+	tryLoadBitSeq(text);
 }
 
 bool cmp(const SortingData &a, const SortingData &b)
