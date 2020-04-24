@@ -325,7 +325,6 @@ void PearlCannonHelper::on_genPushButton_clicked()
 						flag_success = true;
 						Pearl pearl = pearl0;
 						pearl.accelerate(s.getThrust());
-						pearl.tick();
 						double mn = 1e10;
 						SortingData best = SortingData{mn, pearl.getPosition(), -1, s};
 						for (int tick = 0; tick < maxTick; tick++)
