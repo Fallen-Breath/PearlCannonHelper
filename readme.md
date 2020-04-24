@@ -11,3 +11,4 @@ Works on Windows
 
 在Windows上运行
 
+![shapshot](https://raw.githubusercontent.com/Fallen-Breath/PearlCannonHelper/360FTL-HEAVY/shapshot.png)
