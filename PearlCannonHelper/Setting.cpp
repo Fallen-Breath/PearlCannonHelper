@@ -59,15 +59,29 @@ Setting::~Setting()
 {
 }
 
-QString split(int &num, int step, int k)
+int qpow(int a, int b)
 {
-	for (int i = 0; i < k - 1; i++) step *= 2;
+	int ans = 1;
+	for (; b > 0; b >>= 1, a *= a)
+		if (b & 1)
+			ans = ans * a;
+	return ans;
+}
+
+QString split(int &num, int step, int k, int maxCount)
+{
+	step *= qpow(2, k - 1);
 	QString ret;
 	for (; k > 0; k--, step /= 2)
 	{
-		bool flag = step <= num;
+		int t = qpow(2, k - 1);
+		bool flag = step <= num && t <= maxCount;
 		ret += QString::number(flag);
-		if (flag) num -= step;
+		if (flag)
+		{
+			num -= step;
+			maxCount -= t;
+		}
 	}
 	return ret;
 }
@@ -75,14 +89,14 @@ QString split(int &num, int step, int k)
 QString Setting::toString()
 {
 	int a = this->amount_l, b = this->amount_r, d = this->direction, p = this->pitch;
-	QString a1 = StringHelper::reverse(split(a, 260, 3));
-	QString a2 = StringHelper::reverse(split(a, 10, 5));
-	QString a3 = StringHelper::reverse(split(a, 1, 4));
-	QString b1 = split(b, 260, 3);
-	QString b2 = split(b, 10, 5);
-	QString b3 = split(b, 1, 4);
-	QString ds = split(d, 1, 2);
-	QString ps = split(p, 1, 1);
+	QString a1 = StringHelper::reverse(split(a, 260, 3, Constant::max260Count));
+	QString a2 = StringHelper::reverse(split(a, 10, 5, Constant::max10Count));
+	QString a3 = StringHelper::reverse(split(a, 1, 4, Constant::max1Count));
+	QString b1 = split(b, 260, 3, Constant::max260Count);
+	QString b2 = split(b, 10, 5, Constant::max10Count);
+	QString b3 = split(b, 1, 4, Constant::max1Count);
+	QString ds = split(d, 1, 2, 3);
+	QString ps = split(p, 1, 1, 1);
 	return QString("[%1 %2] [%3 %4] [%5 %6 %7 %8]").arg(a1).arg(b1).arg(a3).arg(b3).arg(ps).arg(a2).arg(ds).arg(b2);
 }
 

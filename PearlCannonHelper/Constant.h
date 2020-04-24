@@ -8,6 +8,9 @@ class Constant
 public:
 	static const QString iniFileName;
 	static const int maxTNT = 7 * 260;
+	static const int max260Count = 6;
+	static const int max10Count = 26;
+	static const int max1Count = 10;
 	static const vec3d delta_position[2];
 	static const vec3d motion[2];
 	static const vec3d thrust[2];
