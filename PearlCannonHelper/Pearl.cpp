@@ -1,4 +1,4 @@
-#include "Pearl.h"
+﻿#include "Pearl.h"
 
 Pearl::Pearl(vec3d t_p, vec3d t_m) :position(t_p), momentum(t_m)
 {
@@ -47,7 +47,7 @@ void Pearl::tick(int cnt)
 	{
 		position += momentum;
 		momentum *= 0.99;
-		momentum.y += -0.03;
+		momentum.y -= 0.03;
 	}
 }
 void Pearl::tick()

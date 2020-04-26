@@ -9,6 +9,7 @@ public:
 	vec3d();
 	vec3d(double, double, double);
 	double distance(const vec3d &);
+	double length();
 	double angle();
 	QString toString();
 	friend vec3d operator + (const vec3d &, const vec3d &);

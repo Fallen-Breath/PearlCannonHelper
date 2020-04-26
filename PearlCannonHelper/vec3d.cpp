@@ -11,10 +11,12 @@ vec3d::vec3d(double t_x, double t_y, double t_z): x(t_x), y(t_y), z(t_z)
 
 double vec3d::distance(const vec3d &a)
 {
-	double dx = x - a.x;
-	double dy = y - a.y;
-	double dz = z - a.z;
-	return std::sqrt(dx * dx + dy * dy + dz * dz);
+	return (*this - a).length();
+}
+
+double vec3d::length()
+{
+	return std::sqrt(x * x + y * y + z * z);
 }
 
 double vec3d::angle()

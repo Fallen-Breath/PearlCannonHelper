@@ -11,6 +11,9 @@
 #include <cmath>
 using namespace std;
 
+
+const double pi = acos(-1);
+
 PearlCannonHelper::PearlCannonHelper(QWidget *parent): QMainWindow(parent)
 {
 	flag_initializing = true;
@@ -228,28 +231,6 @@ void PearlCannonHelper::on_pasteBitPushButton_clicked()
 	QString text = QApplication::clipboard()->text();
 	tryLoadBitSeq(text);
 }
-
-bool intersect(double a1, double a2, double b1, double b2)
-{
-	return max(a1, b1) < min(a2, b2);
-}
-
-bool inRange(int direction, double angle, double delta)
-{
-	const double pi = acos(-1);
-	double a1 = Setting(0, 1, direction, 0).getThrust().angle();
-	double a2 = Setting(1, 0, direction, 0).getThrust().angle();
-	if (a2 < a1) swap(a1, a2);
-	if (abs(a2 - a1) > pi)
-	{
-		a1 += 2 * pi;
-		swap(a1, a2);
-	}
-	double b1 = angle - delta;
-	double b2 = angle + delta;
-	return intersect(a1, a2, b1, b2) || intersect(a1 + 2 * pi, a2 + 2 * pi, b1, b2) || intersect(a1, a2, b1 + 2 * pi, b2 + 2 * pi);
-}
-
 void PearlCannonHelper::updateResult()
 {
 	QStringList column;
@@ -291,6 +272,24 @@ bool cmpTNT(const SortingData &a, const SortingData &b)
 {
 	return a.setting.amount_l + a.setting.amount_r < b.setting.amount_l + b.setting.amount_r;
 }
+bool intersect(double a1, double a2, double b1, double b2)
+{
+	return max(a1, b1) < min(a2, b2);
+}
+bool inRange(int direction, double angle, double delta)
+{
+	double a1 = Setting(0, 1, direction, 0).getThrust().angle();
+	double a2 = Setting(1, 0, direction, 0).getThrust().angle();
+	if (a2 < a1) swap(a1, a2);
+	if (abs(a2 - a1) > pi)
+	{
+		a1 += 2 * pi;
+		swap(a1, a2);
+	}
+	double b1 = angle - delta;
+	double b2 = angle + delta;
+	return intersect(a1, a2, b1, b2) || intersect(a1 + 2 * pi, a2 + 2 * pi, b1, b2) || intersect(a1, a2, b1 + 2 * pi, b2 + 2 * pi);
+}
 void PearlCannonHelper::on_genPushButton_clicked()
 {
 	double dstPosX = ui.dstXLineEdit->text().toDouble();
@@ -300,8 +299,11 @@ void PearlCannonHelper::on_genPushButton_clicked()
 	double groundY = ui.groundYLineEdit_2->text().toInt();
 
 	Pearl pearl0 = getPearl();
-	double angle = (vec3d(dstPosX, pearl0.getY(), dstPosZ) - pearl0.getPosition()).angle();
-	double delta = 1.0 / maxTNT;
+	vec3d vec = vec3d(dstPosX, pearl0.getY(), dstPosZ) - pearl0.getPosition();
+	double angle = vec.angle();
+	double delta = 10.0 / maxTNT;
+	double a1 = angle - delta;
+	double a2 = angle + delta;
 	QVector<SortingData> srt;
 	int cnt = 0;
 	for (int d = 0; d < 4; d++)
@@ -317,7 +319,7 @@ void PearlCannonHelper::on_genPushButton_clicked()
 						Setting s = Setting(i, j, d, p);
 						cnt++;
 						double a = s.getThrust().angle();
-						if (!(abs(angle - a) < delta))
+						if (!(a1 < a && a < a2 || a1 < a + 2 * pi && a + 2 * pi < a2 || a1 < a - 2 * pi && a - 2 * pi < a2))
 						{
 							if (flag_success) flag_break = true;
 							continue;
@@ -336,6 +338,10 @@ void PearlCannonHelper::on_genPushButton_clicked()
 							{
 								mn = dis;
 								best = SortingData{mn, pearl.getPosition(), tick + 1, s};
+							}
+							else
+							{
+								break;
 							}
 						}
 						if (mn != 1e10) srt.push_back(best);
