@@ -44,13 +44,13 @@ public:
     QGroupBox *groupBox_3;
     QGridLayout *gridLayout_4;
     QLineEdit *pearlZLineEdit;
-    QLabel *rotationLabel;
     QLineEdit *pearlXLineEdit;
-    QLabel *pearlZLabel;
     QLineEdit *PlayerYLineEdit;
+    QLabel *pearlZLabel;
     QComboBox *rotationComboBox;
-    QLabel *pearlXLabel;
+    QLabel *rotationLabel;
     QLabel *PlayerYLabel;
+    QLabel *pearlXLabel;
     QGroupBox *groupBox;
     QGridLayout *gridLayout_5;
     QLabel *posZLabel_3;
@@ -194,16 +194,6 @@ public:
 
         gridLayout_4->addWidget(pearlZLineEdit, 1, 1, 1, 2);
 
-        rotationLabel = new QLabel(groupBox_3);
-        rotationLabel->setObjectName(QString::fromUtf8("rotationLabel"));
-        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Preferred);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(rotationLabel->sizePolicy().hasHeightForWidth());
-        rotationLabel->setSizePolicy(sizePolicy3);
-
-        gridLayout_4->addWidget(rotationLabel, 3, 0, 1, 2);
-
         pearlXLineEdit = new QLineEdit(groupBox_3);
         pearlXLineEdit->setObjectName(QString::fromUtf8("pearlXLineEdit"));
         sizePolicy2.setHeightForWidth(pearlXLineEdit->sizePolicy().hasHeightForWidth());
@@ -212,15 +202,6 @@ public:
         pearlXLineEdit->setReadOnly(false);
 
         gridLayout_4->addWidget(pearlXLineEdit, 0, 1, 1, 2);
-
-        pearlZLabel = new QLabel(groupBox_3);
-        pearlZLabel->setObjectName(QString::fromUtf8("pearlZLabel"));
-        sizePolicy3.setHeightForWidth(pearlZLabel->sizePolicy().hasHeightForWidth());
-        pearlZLabel->setSizePolicy(sizePolicy3);
-        pearlZLabel->setFont(font1);
-        pearlZLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_4->addWidget(pearlZLabel, 1, 0, 1, 1);
 
         PlayerYLineEdit = new QLineEdit(groupBox_3);
         PlayerYLineEdit->setObjectName(QString::fromUtf8("PlayerYLineEdit"));
@@ -231,6 +212,18 @@ public:
         PlayerYLineEdit->setFont(font);
 
         gridLayout_4->addWidget(PlayerYLineEdit, 2, 1, 1, 2);
+
+        pearlZLabel = new QLabel(groupBox_3);
+        pearlZLabel->setObjectName(QString::fromUtf8("pearlZLabel"));
+        QSizePolicy sizePolicy3(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(pearlZLabel->sizePolicy().hasHeightForWidth());
+        pearlZLabel->setSizePolicy(sizePolicy3);
+        pearlZLabel->setFont(font1);
+        pearlZLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_4->addWidget(pearlZLabel, 1, 0, 1, 1);
 
         rotationComboBox = new QComboBox(groupBox_3);
         rotationComboBox->addItem(QString());
@@ -246,6 +239,19 @@ public:
 
         gridLayout_4->addWidget(rotationComboBox, 3, 2, 1, 1);
 
+        rotationLabel = new QLabel(groupBox_3);
+        rotationLabel->setObjectName(QString::fromUtf8("rotationLabel"));
+        sizePolicy3.setHeightForWidth(rotationLabel->sizePolicy().hasHeightForWidth());
+        rotationLabel->setSizePolicy(sizePolicy3);
+
+        gridLayout_4->addWidget(rotationLabel, 3, 0, 1, 2);
+
+        PlayerYLabel = new QLabel(groupBox_3);
+        PlayerYLabel->setObjectName(QString::fromUtf8("PlayerYLabel"));
+        PlayerYLabel->setFont(font);
+
+        gridLayout_4->addWidget(PlayerYLabel, 2, 0, 1, 1);
+
         pearlXLabel = new QLabel(groupBox_3);
         pearlXLabel->setObjectName(QString::fromUtf8("pearlXLabel"));
         sizePolicy3.setHeightForWidth(pearlXLabel->sizePolicy().hasHeightForWidth());
@@ -254,12 +260,6 @@ public:
         pearlXLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
         gridLayout_4->addWidget(pearlXLabel, 0, 0, 1, 1);
-
-        PlayerYLabel = new QLabel(groupBox_3);
-        PlayerYLabel->setObjectName(QString::fromUtf8("PlayerYLabel"));
-        PlayerYLabel->setFont(font);
-
-        gridLayout_4->addWidget(PlayerYLabel, 2, 0, 1, 1);
 
 
         verticalLayout_4->addWidget(groupBox_3);
@@ -827,14 +827,8 @@ public:
         PearlCannonHelperClass->setWindowTitle(QApplication::translate("PearlCannonHelperClass", "PearlCannonHelper", nullptr));
         groupBox_3->setTitle(QApplication::translate("PearlCannonHelperClass", "360FTLH information", nullptr));
         pearlZLineEdit->setText(QApplication::translate("PearlCannonHelperClass", "-55.9375", nullptr));
-#ifndef QT_NO_TOOLTIP
-        rotationLabel->setToolTip(QApplication::translate("PearlCannonHelperClass", "If you have rotated the machine when building it", nullptr));
-#endif // QT_NO_TOOLTIP
-#ifndef QT_NO_WHATSTHIS
-        rotationLabel->setWhatsThis(QString());
-#endif // QT_NO_WHATSTHIS
-        rotationLabel->setText(QApplication::translate("PearlCannonHelperClass", "Roation", nullptr));
         pearlXLineEdit->setText(QApplication::translate("PearlCannonHelperClass", "-155.0625", nullptr));
+        PlayerYLineEdit->setText(QApplication::translate("PearlCannonHelperClass", "64", nullptr));
 #ifndef QT_NO_TOOLTIP
         pearlZLabel->setToolTip(QApplication::translate("PearlCannonHelperClass", "The z coordinate of the aligned pearl", nullptr));
 #endif // QT_NO_TOOLTIP
@@ -842,19 +836,18 @@ public:
         pearlZLabel->setWhatsThis(QString());
 #endif // QT_NO_WHATSTHIS
         pearlZLabel->setText(QApplication::translate("PearlCannonHelperClass", "Pearl Z", nullptr));
-        PlayerYLineEdit->setText(QApplication::translate("PearlCannonHelperClass", "64", nullptr));
         rotationComboBox->setItemText(0, QApplication::translate("PearlCannonHelperClass", "None", nullptr));
         rotationComboBox->setItemText(1, QApplication::translate("PearlCannonHelperClass", "CW_90", nullptr));
         rotationComboBox->setItemText(2, QApplication::translate("PearlCannonHelperClass", "CW_180", nullptr));
         rotationComboBox->setItemText(3, QApplication::translate("PearlCannonHelperClass", "CCW_90", nullptr));
 
 #ifndef QT_NO_TOOLTIP
-        pearlXLabel->setToolTip(QApplication::translate("PearlCannonHelperClass", "The x coordinate of the aligned pearl", nullptr));
+        rotationLabel->setToolTip(QApplication::translate("PearlCannonHelperClass", "If you have rotated the machine when building it", nullptr));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_WHATSTHIS
-        pearlXLabel->setWhatsThis(QString());
+        rotationLabel->setWhatsThis(QString());
 #endif // QT_NO_WHATSTHIS
-        pearlXLabel->setText(QApplication::translate("PearlCannonHelperClass", "Pearl X", nullptr));
+        rotationLabel->setText(QApplication::translate("PearlCannonHelperClass", "Roation", nullptr));
 #ifndef QT_NO_TOOLTIP
         PlayerYLabel->setToolTip(QApplication::translate("PearlCannonHelperClass", "The y value of the player entity when he's ready to throw the pearl", nullptr));
 #endif // QT_NO_TOOLTIP
@@ -862,6 +855,13 @@ public:
         PlayerYLabel->setWhatsThis(QString());
 #endif // QT_NO_WHATSTHIS
         PlayerYLabel->setText(QApplication::translate("PearlCannonHelperClass", "Player Y", nullptr));
+#ifndef QT_NO_TOOLTIP
+        pearlXLabel->setToolTip(QApplication::translate("PearlCannonHelperClass", "The x coordinate of the aligned pearl", nullptr));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_WHATSTHIS
+        pearlXLabel->setWhatsThis(QString());
+#endif // QT_NO_WHATSTHIS
+        pearlXLabel->setText(QApplication::translate("PearlCannonHelperClass", "Pearl X", nullptr));
 #ifndef QT_NO_TOOLTIP
         groupBox->setToolTip(QApplication::translate("PearlCannonHelperClass", "Where you want to go", nullptr));
 #endif // QT_NO_TOOLTIP
@@ -932,7 +932,7 @@ public:
         languageComboBox->setItemText(0, QApplication::translate("PearlCannonHelperClass", "en", nullptr));
         languageComboBox->setItemText(1, QApplication::translate("PearlCannonHelperClass", "zh", nullptr));
 
-        CreditLabel->setText(QApplication::translate("PearlCannonHelperClass", "v3.5 by Fallen_Breath", nullptr));
+        CreditLabel->setText(QApplication::translate("PearlCannonHelperClass", "v3.6 by Fallen_Breath", nullptr));
     } // retranslateUi
 
 };

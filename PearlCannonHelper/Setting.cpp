@@ -26,12 +26,12 @@ Setting::Setting(QString text) : Setting()
 			bits.push_back(c == '1');
 	if (bits.length() != 27) throw "Illegal setting bits";
 	auto p = bits.begin();
-	this->amount_l += 260 * 1 * (*p++);
-	this->amount_l += 260 * 2 * (*p++);
-	this->amount_l += 260 * 4 * (*p++);
-	this->amount_r += 260 * 4 * (*p++);
-	this->amount_r += 260 * 2 * (*p++);
-	this->amount_r += 260 * 1 * (*p++);
+	this->amount_l += Constant::bigArrayTNT * 1 * (*p++);
+	this->amount_l += Constant::bigArrayTNT * 2 * (*p++);
+	this->amount_l += Constant::bigArrayTNT * 4 * (*p++);
+	this->amount_r += Constant::bigArrayTNT * 4 * (*p++);
+	this->amount_r += Constant::bigArrayTNT * 2 * (*p++);
+	this->amount_r += Constant::bigArrayTNT * 1 * (*p++);
 	this->amount_l += 1 * 1 * (*p++);
 	this->amount_l += 1 * 2 * (*p++);
 	this->amount_l += 1 * 4 * (*p++);
@@ -89,11 +89,11 @@ QString split(int &num, int step, int k, int maxCount)
 QString Setting::toString()
 {
 	int a = this->amount_l, b = this->amount_r, d = this->direction, p = this->pitch;
-	QString a1 = StringHelper::reverse(split(a, 260, 3, Constant::max260Count));
-	QString a2 = StringHelper::reverse(split(a, 10, 5, Constant::max10Count));
+	QString a1 = StringHelper::reverse(split(a, Constant::bigArrayTNT, 3, Constant::maxBigArrayCount - 1));
+	QString a2 = StringHelper::reverse(split(a, 10, 5, Constant::max10Count - 1));
 	QString a3 = StringHelper::reverse(split(a, 1, 4, Constant::max1Count));
-	QString b1 = split(b, 260, 3, Constant::max260Count);
-	QString b2 = split(b, 10, 5, Constant::max10Count);
+	QString b1 = split(b, Constant::bigArrayTNT, 3, Constant::maxBigArrayCount - 1);
+	QString b2 = split(b, 10, 5, Constant::max10Count - 1);
 	QString b3 = split(b, 1, 4, Constant::max1Count);
 	QString ds = split(d, 1, 2, 3);
 	QString ps = split(p, 1, 1, 1);
